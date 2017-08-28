@@ -61,9 +61,10 @@ export default class TripUsers extends React.Component {
         </View>
         <ScrollView>
           {
-            this.state.users.map(e => {
+
+            this.state.users.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)).map(e => {
               return (
-                <TouchableOpacity key={e.id} style={styles.users} onPress={() => navigate('Receipts', { user_id: e.id })}>
+                <TouchableOpacity key={e.id} style={styles.users} onPress={() => navigate('Receipts', { user_id: e.id, updateUsers: this.updateUsers, trip_id: this.state.trip_id })}>
                   <Text style={styles.title}>{e.name}</Text>
                   <Image source={{uri: e.image_url}} style={styles.image} />
                 </TouchableOpacity>
@@ -108,6 +109,5 @@ const styles = StyleSheet.create({
   newUser: {
     textAlign: 'center',
     marginTop: 10,
-
   },
 });
