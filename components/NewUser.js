@@ -54,9 +54,10 @@ export default class NewUser extends React.Component {
           trip_id: this.state.trip_id
         })
       })
-      .then((res) => {
-        updateUsers(res);
-        this.props.navigation.goBack()
+      .then(res => res.json())
+      .then(() => {
+        this.state.updateUsers();
+        this.props.navigation.goBack();
       });
     }
   }
@@ -104,7 +105,7 @@ export default class NewUser extends React.Component {
         {this.state.urlErr ? <FormValidationMessage>Please enter a URL for the user icon</FormValidationMessage> : null}
 
         <FormLabel>Phone Number</FormLabel>
-        <FormInput onChangeText={this.updatePhone} />
+        <FormInput onChangeText={this.updatePhone} placeholder='0000000000'/>
         {this.state.phoneErr ? <FormValidationMessage>Please enter a 10 digit phone number</FormValidationMessage> : null}
 
         <TouchableOpacity onPress={this.post} style={styles.newButton}>

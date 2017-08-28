@@ -37,9 +37,16 @@ export default class TripUsers extends React.Component {
     .then(users => this.setState({ users }));
   }
 
-  updateUsers = (newUser) => {
-    const users = [...this.state.user].push(newUser);
-    this.setState({ users });
+  updateUsers = () => {
+    fetch(`https://split-trip.herokuapp.com/users/trip/${this.state.trip_id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        }
+    })
+    .then(result => result.json())
+    .then(users => this.setState({ users }));
   }
 
 
