@@ -60,14 +60,20 @@ export default class Receipts extends React.Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.user}>
         <Text style={styles.name}>{this.state.user.name}</Text>
         <Image source={{ uri: this.state.user.image_url}} style={styles.image}/>
+        <TouchableOpacity onPress={() => navigate('EditUser', { user_id: this.state.user_id})}>
+          <Text>Edit User</Text>
+        </TouchableOpacity>
 
-        <FormLabel>Name</FormLabel>
-        <FormInput onChangeText={this.update} val={this.state.newAmount}/>
-        {this.state.err ? <FormValidationMessage>Please enter a positive number</FormValidationMessage> : null}
+        <View style={styles.form}>
+          <FormLabel>Amount Spent</FormLabel>
+          <FormInput onChangeText={this.update} val={this.state.newAmount}/>
+          {this.state.err ? <FormValidationMessage>Please enter a positive number</FormValidationMessage> : null}
+        </View>
         <TouchableOpacity onPress={this.post}>
           <Text>Add New Receipt</Text>
         </TouchableOpacity>
@@ -87,6 +93,14 @@ const styles = StyleSheet.create({
     height: 100,
   },
   name: {
-    fontSize: 80
-  }
+    fontSize: 80,
+  },
+  form: {
+    marginVertical: 30,
+    paddingHorizontal: 15,
+    // paddingLeft: 100,
+    // marginRight: 100,
+    // paddingRight: 100,
+    marginLeft: 100,
+  },
 });
