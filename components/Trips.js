@@ -30,18 +30,25 @@ export default class Trips extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <ScrollView>
-        {
-          this.state.trips.map(e => {
-            return (
-              <TouchableOpacity key={e.id} style={styles.trips} onPress={() => navigate('TripUsers', { trip_id: e.id, trip_name: e.name })}>
-                <Text style={styles.title}>{e.name}</Text>
-                <Image source={{uri: e.image_url}} style={styles.image} />
-              </TouchableOpacity>
-            );
-          })
-        }
-      </ScrollView>
+      <View>
+        <View>
+          <TouchableOpacity onPress={() => navigate('NewTrip')}>
+            <Text style={styles.newTrip}>Create a New Trip</Text>
+          </TouchableOpacity>
+        </View>
+        <ScrollView>
+          {
+            this.state.trips.map(e => {
+              return (
+                <TouchableOpacity key={e.id} style={styles.trips} onPress={() => navigate('TripUsers', { trip_id: e.id, trip_name: e.name })}>
+                  <Text style={styles.title}>{e.name}</Text>
+                  <Image source={{uri: e.image_url}} style={styles.image} />
+                </TouchableOpacity>
+              );
+            })
+          }
+        </ScrollView>
+      </View>
     );
   }
 }
@@ -61,5 +68,10 @@ const styles = StyleSheet.create({
   image: {
     width: 200,
     height: 200,
-  }
+  },
+  newTrip: {
+    textAlign: 'center',
+    marginTop: 40,
+
+  },
 });
