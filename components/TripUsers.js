@@ -1,17 +1,27 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
 
-export default class Trips extends React.Component {
+export default class TripUsers extends React.Component {
   static navigationOptions = {
     // header: null,
-    title: 'Trips',
+    // headerBackTitle: this.state.name,
+    // headerBackTitle: this.state.name,
+    headerStyle: {
+      // backgroundColor: 'white',
+    },
+    headerBackTitleStyle: {
+    },
+    // headerTintColor: 'black',
+    headerTitleStyle: {
+    }
   };
 
   constructor(props) {
     super(props);
     this.state = {
       users: [],
-      trip_id: this.props.navigation.state.params.trip_id
+      trip_id: this.props.navigation.state.params.trip_id,
+      name: this.props.navigation.state.params.trip_name,
     };
   }
   componentDidMount() {
@@ -30,7 +40,7 @@ export default class Trips extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View>
+      <View style={styles.container}>
         <ScrollView>
           {
             this.state.users.map(e => {
@@ -43,15 +53,20 @@ export default class Trips extends React.Component {
             })
           }
         </ScrollView>
-        <TouchableOpacity onPress={() => navigate('Total', { trip_id: this.state.trip_id })}>
-          <Text>Total Trip</Text>
-        </TouchableOpacity>
+        <View>
+          <TouchableOpacity onPress={() => navigate('Total', { trip_id: this.state.trip_id })}>
+            <Text style={styles.footer}>Total Trip</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
   title: {
     fontSize: 20,
     marginBottom: 20,
@@ -67,5 +82,9 @@ const styles = StyleSheet.create({
   image: {
     width: 75,
     height: 75,
+  },
+  footer: {
+    textAlign: 'center',
+    marginBottom: 10,
   }
 });

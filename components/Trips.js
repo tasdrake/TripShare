@@ -3,7 +3,10 @@ import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'rea
 import { NavigationActions } from 'react-navigation'
 
 export default class Trips extends React.Component {
-  static navigationOptions = { header: null }
+  static navigationOptions = {
+     header: null,
+    //  headerBackTitle: 'Trips',
+   }
 
   constructor(props) {
     super(props);
@@ -21,6 +24,7 @@ export default class Trips extends React.Component {
     })
     .then(result => result.json())
     .then(trips => this.setState({ trips }));
+    // flashScrollIndicators();
   }
 
   render() {
@@ -30,7 +34,7 @@ export default class Trips extends React.Component {
         {
           this.state.trips.map(e => {
             return (
-              <TouchableOpacity key={e.id} style={styles.trips} onPress={() => navigate('TripUsers', { trip_id: e.id })}>
+              <TouchableOpacity key={e.id} style={styles.trips} onPress={() => navigate('TripUsers', { trip_id: e.id, trip_name: e.name })}>
                 <Text style={styles.title}>{e.name}</Text>
                 <Image source={{uri: e.image_url}} style={styles.image} />
               </TouchableOpacity>

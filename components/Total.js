@@ -5,7 +5,7 @@ import { NavigationActions } from 'react-navigation'
 export default class Total extends React.Component {
   static navigationOptions = {
     // header: null,
-    title: 'Total',
+    // title: 'Total',
   };
 
   constructor(props) {
@@ -33,29 +33,48 @@ export default class Total extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    console.log(this.state.trip_users);
     return (
-      <View>
-        <Text>{this.state.totals.individualCost}</Text>
-        <Text>{this.state.totals.total}</Text>
+      <View style={styles.container}>
+        <ScrollView>
+          {/* <Text>{this.state.totals.individualCost}</Text>
+          <Text>{this.state.totals.total}</Text> */}
 
-        {
-          this.state.trip_users.map(e => {
-            console.log(e);
-            return (
-              <Text key={e.id}>{e.name}     {e.amount_owed}</Text>
-            );
-          })
-        }
+          {
+            this.state.trip_users.map(e => {
+              return (
+                <View key={e.id} style={styles.people}>
+                  <Text>{e.name}</Text>
+                  <Text>{e.amount_owed}</Text>
+                  <Text>{e.paid ? 'true' : 'false'}</Text>
+                </View>
+              );
+            })
+          }
 
-        <TouchableOpacity onPress={() => navigate('Trips')}>
-          <Text>Search Other Trips</Text>
-        </TouchableOpacity>
+        </ScrollView>
+        <View>
+          <TouchableOpacity onPress={() => navigate('Trips')}>
+            <Text style={styles.footer}>Search Other Trips</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
 }
 
-// const styles = StyleSheet.create({
-//
-// });
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  footer: {
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+  people: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginVertical: 10,
+    marginHorizontal: 10,
+  }
+});
