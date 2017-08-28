@@ -4,6 +4,7 @@ import TripUsers from '../components/TripUsers';
 import Receipts from '../components/Receipts';
 import Total from '../components/Total';
 import NewTrip from '../components/NewTrip';
+import NewUser from '../components/NewUser';
 
 export const Root = StackNavigator({
   Trips: {
@@ -20,5 +21,8 @@ export const Root = StackNavigator({
   },
   NewTrip: {
     screen: NewTrip
+  },
+  NewUser: {
+    screen: NewUser
   },
 });

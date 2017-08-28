@@ -24,6 +24,7 @@ export default class TripUsers extends React.Component {
       name: this.props.navigation.state.params.trip_name,
     };
   }
+
   componentDidMount() {
     fetch(`https://split-trip.herokuapp.com/users/trip/${this.state.trip_id}`, {
       method: 'GET',
@@ -36,11 +37,21 @@ export default class TripUsers extends React.Component {
     .then(users => this.setState({ users }));
   }
 
+  updateUsers = (newUser) => {
+    const users = [...this.state.user].push(newUser);
+    this.setState({ users });
+  }
+
 
   render() {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
+        <View>
+          <TouchableOpacity onPress={() => navigate('NewUser', { trip_name: this.state.name, trip_id: this.state.trip_id, updateUsers: this.updateUsers })}>
+            <Text style={styles.newUser}>Add Someone to {this.state.name}</Text>
+          </TouchableOpacity>
+        </View>
         <ScrollView>
           {
             this.state.users.map(e => {
@@ -85,6 +96,11 @@ const styles = StyleSheet.create({
   },
   footer: {
     textAlign: 'center',
-    marginBottom: 10,
-  }
+    marginVertical: 10,
+  },
+  newUser: {
+    textAlign: 'center',
+    marginTop: 10,
+
+  },
 });
