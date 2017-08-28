@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
-import { NavigationActions } from 'react-navigation';
 
 export default class Trips extends React.Component {
   static navigationOptions = {
@@ -16,7 +15,7 @@ export default class Trips extends React.Component {
     };
   }
   componentDidMount() {
-    fetch(`http://localhost:3000/users/trip/${this.state.trip_id}`, {
+    fetch(`https://split-trip.herokuapp.com/users/trip/${this.state.trip_id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -29,19 +28,25 @@ export default class Trips extends React.Component {
 
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
-      <ScrollView>
-        {
-          this.state.users.map(e => {
-            return (
-              <TouchableOpacity key={e.id} style={styles.users} >
-                <Text style={styles.title}>{e.name}</Text>
-                <Image source={{uri: e.image_url}} style={styles.image} />
-              </TouchableOpacity>
-            );
-          })
-        }
-      </ScrollView>
+      <View>
+        <ScrollView>
+          {
+            this.state.users.map(e => {
+              return (
+                <TouchableOpacity key={e.id} style={styles.users} onPress={() => navigate('Receipts', { user_id: e.id })}>
+                  <Text style={styles.title}>{e.name}</Text>
+                  <Image source={{uri: e.image_url}} style={styles.image} />
+                </TouchableOpacity>
+              );
+            })
+          }
+        </ScrollView>
+        <TouchableOpacity onPress={() => navigate('Total', { trip_id: this.state.trip_id })}>
+          <Text>Total Trip</Text>
+        </TouchableOpacity>
+      </View>
     );
   }
 }

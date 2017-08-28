@@ -12,7 +12,7 @@ export default class Trips extends React.Component {
     };
   }
   componentDidMount() {
-    fetch('http://localhost:3000/trips', {
+    fetch('https://split-trip.herokuapp.com/trips', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -21,16 +21,6 @@ export default class Trips extends React.Component {
     })
     .then(result => result.json())
     .then(trips => this.setState({ trips }));
-  }
-
-  nav = () => {
-    const params = NavigationActions.setParams({
-      // params: { title: 'Hello' },
-      key: 'TripUsers',
-    });
-    this.props.navigation.dispatch(params);
-    const { navigate } = this.props.navigation;
-    navigate('TripUsers');
   }
 
   render() {
