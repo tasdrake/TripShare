@@ -1,8 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
-
-
 
 export default class Receipts extends React.Component {
   static navigationOptions = {
@@ -15,8 +13,10 @@ export default class Receipts extends React.Component {
     this.state = {
       user: {},
       user_id: this.props.navigation.state.params.user_id,
+      trip_id: this.props.navigation.state.params.trip_id,
       newAmount: 0,
       err: false,
+      updateUsers: this.props.navigation.state.params.updateUsers,
     };
   }
   componentDidMount() {
@@ -59,13 +59,25 @@ export default class Receipts extends React.Component {
     }
   }
 
+  updateUser = () => {
+    fetch(`https://split-trip.herokuapp.com/users/${this.state.user_id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        }
+    })
+    .then(result => result.json())
+    .then(user => this.setState({ user: user[0] }));
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.user}>
         <Text style={styles.name}>{this.state.user.name}</Text>
         <Image source={{ uri: this.state.user.image_url}} style={styles.image}/>
-        <TouchableOpacity onPress={() => navigate('EditUser', { user_id: this.state.user_id})}>
+        <TouchableOpacity onPress={() => navigate('EditUser', { user_id: this.state.user_id, updateUsers: this.state.updateUsers, updateUser: this.updateUser })}>
           <Text>Edit User</Text>
         </TouchableOpacity>
 
@@ -98,9 +110,6 @@ const styles = StyleSheet.create({
   form: {
     marginVertical: 30,
     paddingHorizontal: 15,
-    // paddingLeft: 100,
-    // marginRight: 100,
-    // paddingRight: 100,
     marginLeft: 100,
   },
 });
