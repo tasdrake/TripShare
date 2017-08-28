@@ -7,7 +7,16 @@ import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elemen
 export default class NewTrip extends React.Component {
   static navigationOptions = {
     // header: null,
-    // title: 'Receipts',
+    // headerBackTitle: this.state.name,
+    // headerBackTitle: this.state.name,
+    headerStyle: {
+      // backgroundColor: 'white',
+    },
+    headerBackTitleStyle: {
+    },
+    // headerTintColor: 'black',
+    headerTitleStyle: {
+    }
   };
 
   constructor(props) {
@@ -47,8 +56,9 @@ export default class NewTrip extends React.Component {
   updateName = (e) => {
     if (!e) {
       this.setState({ nameErr: true });
+      this.setState({ name: e });
     } else {
-      this.setState({ err: false });
+      this.setState({ nameErr: false });
       this.setState({ name: e });
     }
   }
@@ -56,8 +66,10 @@ export default class NewTrip extends React.Component {
   updateUrl = (e) => {
     if (!e) {
       this.setState({ urlErr: true });
+      this.setState({ image_url: e });
+
     } else {
-      this.setState({ err: false });
+      this.setState({ urlErr: false });
       this.setState({ image_url: e });
     }
   }
@@ -67,12 +79,14 @@ export default class NewTrip extends React.Component {
       <View style={styles.user}>
 
         <FormLabel>Trip Name</FormLabel>
-        <FormInput onChangeText={this.updateName} val={this.state.newAmount}/>
+        <FormInput onChangeText={this.updateName}/>
         {this.state.nameErr ? <FormValidationMessage>Please enter a name for the trip</FormValidationMessage> : null}
 
         <FormLabel>Image URL</FormLabel>
-        <FormInput onChangeText={this.updateUrl} val={this.state.newAmount}/>
+        <FormInput onChangeText={this.updateUrl}/>
         {this.state.urlErr ? <FormValidationMessage>Please enter a URL for a picture for the trip</FormValidationMessage> : null}
+
+
 
         <TouchableOpacity onPress={this.post} style={styles.newButton}>
           <Text>Create a New Trip</Text>
