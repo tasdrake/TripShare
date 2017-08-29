@@ -26,11 +26,11 @@ export default class NewTrip extends React.Component {
       image_url: '',
       nameErr: false,
       urlErr: false,
+      updateTrip: this.props.navigation.state.params.updateTrip,
     };
   }
 
   post = () => {
-    console.log(this.state.name, this.state.image_url);
     if (!this.state.name && !this.state.image_url) {
       this.setState({ nameErr: true, urlErr: true });
     } else if (!this.state.name) {
@@ -49,7 +49,10 @@ export default class NewTrip extends React.Component {
           image_url: this.state.image_url
         })
       })
-      .then(() => this.props.navigation.goBack());
+      .then(() => {
+        this.state.updateTrip();
+        this.props.navigation.goBack();
+      });
     }
   }
 

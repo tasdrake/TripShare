@@ -27,12 +27,24 @@ export default class Trips extends React.Component {
     // flashScrollIndicators();
   }
 
+  updateTrip = () => {
+    fetch('https://split-trip.herokuapp.com/trips', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        }
+    })
+    .then(result => result.json())
+    .then(trips => this.setState({ trips }));
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     return (
       <View>
         <View>
-          <TouchableOpacity onPress={() => navigate('NewTrip')}>
+          <TouchableOpacity onPress={() => navigate('NewTrip', { updateTrip: this.updateTrip })}>
             <Text style={styles.newTrip}>Create a New Trip</Text>
           </TouchableOpacity>
         </View>
