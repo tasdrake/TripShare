@@ -19,9 +19,11 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "expo": "^20.0.0",
+    "anyline-ocr-react-native-module": "^3.15.0",
+    "expo": "^20.0.3",
     "react": "16.0.0-alpha.12",
     "react-native": "^0.47.0",
+    "react-native-camera": "^0.10.0",
     "react-native-elements": "^0.16.0",
     "react-navigation": "^1.0.0-beta.11"
   }
