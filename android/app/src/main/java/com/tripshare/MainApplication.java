@@ -3,9 +3,6 @@ package com.tripshare;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.anyline.reactnative.AnylinePackage;
-import com.oblador.vectoricons.VectorIconsPackage;
-import com.lwansbrough.RCTCamera.RCTCameraPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -25,10 +22,7 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new AnylinePackage(),
-            new VectorIconsPackage(),
-            new RCTCameraPackage()
+          new MainReactPackage()
       );
     }
   };
