@@ -106,7 +106,7 @@ export default class Receipts extends React.Component {
               </View>
               <View style={styles.form}>
                 <FormLabel>Amount Spent</FormLabel>
-                <FormInput onChangeText={this.update} value={this.state.newAmount}/>
+                <FormInput keyboardType='numeric' onChangeText={this.update} value={this.state.newAmount}/>
                 {
                   this.state.err
                     ? <FormValidationMessage>Please enter a positive number</FormValidationMessage>

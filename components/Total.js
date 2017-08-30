@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
-import { NavigationActions } from 'react-navigation'
+import { NavigationActions } from 'react-navigation';
+import { List, ListItem } from 'react-native-elements';
 
 export default class Total extends React.Component {
   static navigationOptions = {
@@ -27,6 +28,12 @@ export default class Total extends React.Component {
     .then(result => result.json())
     .then(trip_users => {
       const totals = trip_users.shift();
+      if (String(totals.total).includes('.')) {
+        totals.total = Number(String(totals.total).slice(0, String(totals.total).indexOf('.')));
+      }
+      if (String(totals.individualCost).includes('.')) {
+        totals.individualCost = Number(String(totals.individualCost).slice(0, String(totals.individualCost).indexOf('.')));
+      }
       this.setState({ trip_users, totals });
     });
   }
@@ -35,23 +42,19 @@ export default class Total extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <ScrollView>
-          {/* <Text>{this.state.totals.individualCost}</Text>
-          <Text>{this.state.totals.total}</Text> */}
-
+        <List containerStyle={{marginBottom: 20, marginTop: 0}}>
+          <ListItem hideChevron title={`Trip total: $${this.state.totals.total}`} rightTitle={`Individual cost: $${this.state.totals.individualCost}`} rightTitleStyle={{color: 'black', fontSize: 15}} titleStyle={{color: 'black', fontSize: 15}}/>
           {
-            this.state.trip_users.map(e => {
+            this.state.trip_users.sort((a, b) => (a.name > b.name) ? 1 : -1).map(e => {
+              const color = Number(e.amount_owed) > 0 ? 'red' : 'green';
+              const amount = Number(e.amount_owed) > 0 ? e.amount_owed : e.amount_owed.slice(1);
               return (
-                <View key={e.id} style={styles.people}>
-                  <Text>{e.name}</Text>
-                  <Text>{e.amount_owed}</Text>
-                  <Text>{e.paid ? 'true' : 'false'}</Text>
-                </View>
+                <ListItem roundAvatar avatar={{ uri: e.image_url }} key={e.id} title={e.name} rightTitle={amount} rightTitleStyle={{color}} hideChevron subtitle={e.paid ? 'paid' : null} />
               );
             })
           }
+        </List>
 
-        </ScrollView>
         <View>
           <TouchableOpacity onPress={() => navigate('Trips')}>
             <Text style={styles.footer}>Search Other Trips</Text>
@@ -76,5 +79,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginVertical: 10,
     marginHorizontal: 10,
+  },
+  positive: {
+    color: 'green'
+  },
+  negative: {
+    color: 'red'
   }
 });

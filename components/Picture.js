@@ -2,14 +2,11 @@ import React from 'react';
 import {
   Dimensions,
   StyleSheet,
-  Text,
   TouchableHighlight,
   View,
   Image,
-  TouchableOpacity
 } from 'react-native';
 import Camera from 'react-native-camera';
-import Modal from 'react-native-simple-modal';
 import Spinner from 'react-native-loading-spinner-overlay';
 import axios from 'axios';
 
@@ -19,9 +16,16 @@ const cloudVision  = 'https://vision.googleapis.com/v1/images:annotate?key=' + c
 
 export default class Picture extends React.Component {
   static navigationOptions = {
-    header: null,
-    // title: 'Receipts',
+    headerStyle: {
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+    },
+    headerBackTitleStyle: {
+    },
+    // headerTintColor: 'black',
+    headerTitleStyle: {
+    }
   };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -62,14 +66,7 @@ export default class Picture extends React.Component {
       .then((response) => {
         const textAnnotations  = response.data.responses[0].textAnnotations[0];
         const textContent = textAnnotations.description;
-        const result = textContent.split(' ')
-                                  .join('\n')
-                                  .split('\n')
-                                  .filter(e => e.includes('.'))
-                                  .filter(e => {
-                                    if (!!Number(e[e.indexOf('.') - 1]) && !!Number(e[e.indexOf('.') + 1])) return true
-                                  });
-        console.log(result);
+        const result = textContent.split(/[\n ]/).filter(e => (!!Number(e) && e.includes('.')));
         let end = result[result.length - 1];
         while(!Number(end[0])) end = end.slice(1);
 
