@@ -1,0 +1,27 @@
+{
+  "name": "AnylineReact",
+  "version": "3.15.0",
+  "summary": "anyline-ocr-react-native-module",
+  "authors": {
+    "Anyline": "anyline@anyline.com",
+    "Mike Chudziak": "mike.chudziak@callstack.io"
+  },
+  "homepage": "https://github.com/Anyline/anyline-ocr-react-native-module",
+  "license": "MIT",
+  "platforms": {
+    "ios": "8"
+  },
+  "source": {
+    "git": "https://github.com/Anyline/anyline-ocr-react-native-module.git",
+    "tag": "3.15.0"
+  },
+  "source_files": "*.{h,m}",
+  "dependencies": {
+    "React": [
+
+    ],
+    "Anyline": [
+
+    ]
+  }
+}

@@ -6,10 +6,11 @@ import Total from '../components/Total';
 import NewTrip from '../components/NewTrip';
 import NewUser from '../components/NewUser';
 import EditUser from '../components/EditUser';
+import Picture from '../components/Picture';
 
 export const Root = StackNavigator({
   Trips: {
-    screen: Trips,
+    screen: Trips
   },
   TripUsers: {
     screen: TripUsers
@@ -28,5 +29,8 @@ export const Root = StackNavigator({
   },
   EditUser: {
     screen: EditUser
+  },
+  Picture: {
+    screen: Picture
   },
 });

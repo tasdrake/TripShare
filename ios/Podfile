@@ -1,0 +1,7 @@
+project 'TripShare.xcodeproj'
+
+target 'TripShare' do
+  # pod 'React', :path => '../node_modules/react-native'
+  # pod 'AnylineReact', path: '../node_modules/anyline-ocr-react-native-module/ios'
+  # pod 'Yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+end
