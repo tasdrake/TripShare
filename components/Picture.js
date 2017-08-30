@@ -13,7 +13,7 @@ import Modal from 'react-native-simple-modal';
 import Spinner from 'react-native-loading-spinner-overlay';
 import axios from 'axios';
 
-const cloudVisionKey = 'AIzaSyBktFQKj57KRC0AWzN-ctCItENWVDZGth0';
+const cloudVisionKey = 'AIzaSyDfTUJmMudDKkZhnT8k1pddJgVckKkm_RY';
 // Endpoints
 const cloudVision  = 'https://vision.googleapis.com/v1/images:annotate?key=' + cloudVisionKey;
 
@@ -62,10 +62,18 @@ export default class Picture extends React.Component {
       .then((response) => {
         const textAnnotations  = response.data.responses[0].textAnnotations[0];
         const textContent = textAnnotations.description;
-        let result = textContent.split(' ').join('\n').split('\n').filter(e => e.includes('.'));
-        while(!Number(result[0])) result = result.slice(1);
+        const result = textContent.split(' ')
+                                  .join('\n')
+                                  .split('\n')
+                                  .filter(e => e.includes('.'))
+                                  .filter(e => {
+                                    if (!!Number(e[e.indexOf('.') - 1]) && !!Number(e[e.indexOf('.') + 1])) return true
+                                  });
+        console.log(result);
+        let end = result[result.length - 1];
+        while(!Number(end[0])) end = end.slice(1);
 
-        self.setTextContent(result[result.length - 1]);
+        self.setTextContent(end);
       })
       .catch(error => console.log(error, "error"));
       })

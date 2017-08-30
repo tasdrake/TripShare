@@ -133,7 +133,6 @@ android {
 }
 
 dependencies {
-    compile project(':anyline-ocr-react-native-module')
     compile project(':react-native-vector-icons')
     compile project(':react-native-camera')
     compile fileTree(dir: "libs", include: ["*.jar"])
