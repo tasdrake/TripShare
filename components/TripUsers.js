@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { SearchBar } from 'react-native-elements';
+
 
 export default class TripUsers extends React.Component {
   static navigationOptions = {
@@ -22,6 +24,7 @@ export default class TripUsers extends React.Component {
       users: [],
       trip_id: this.props.navigation.state.params.trip_id,
       name: this.props.navigation.state.params.trip_name,
+      text: '',
     };
   }
 
@@ -49,6 +52,9 @@ export default class TripUsers extends React.Component {
     .then(users => this.setState({ users }));
   }
 
+  search = (text) => this.setState({text})
+
+
 
   render() {
     const { navigate } = this.props.navigation;
@@ -59,10 +65,15 @@ export default class TripUsers extends React.Component {
             <Text style={styles.newUser}>Add Someone to {this.state.name}</Text>
           </TouchableOpacity>
         </View>
+        <SearchBar
+          round
+          lightTheme
+          onChangeText={this.search}
+          placeholder='Search for someone' />
         <ScrollView>
           {
 
-            this.state.users.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)).map(e => {
+            this.state.users.filter(e => e.name.includes(this.state.text)).sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)).map(e => {
               return (
                 <TouchableOpacity key={e.id} style={styles.users} onPress={() => navigate('Receipts', { user_id: e.id, updateUsers: this.updateUsers, trip_id: this.state.trip_id })}>
                   <Text style={styles.title}>{e.name}</Text>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
-import { NavigationActions } from 'react-navigation'
+import { NavigationActions } from 'react-navigation';
+import { SearchBar } from 'react-native-elements';
 
 export default class Trips extends React.Component {
   static navigationOptions = {
@@ -11,7 +12,8 @@ export default class Trips extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      trips: []
+      trips: [],
+      text: '',
     };
   }
   componentDidMount() {
@@ -39,6 +41,8 @@ export default class Trips extends React.Component {
     .then(trips => this.setState({ trips }));
   }
 
+  search = (text) => this.setState({text})
+
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -48,9 +52,14 @@ export default class Trips extends React.Component {
             <Text style={styles.newTrip}>Create a New Trip</Text>
           </TouchableOpacity>
         </View>
+        <SearchBar
+          round
+          lightTheme
+          onChangeText={this.search}
+          placeholder='Search for a Specific Trip' />
         <ScrollView>
           {
-            this.state.trips.map(e => {
+            this.state.trips.filter(e => e.name.includes(this.state.text)).map(e => {
               return (
                 <TouchableOpacity key={e.id} style={styles.trips} onPress={() => navigate('TripUsers', { trip_id: e.id, trip_name: e.name })}>
                   <Text style={styles.title}>{e.name}</Text>
