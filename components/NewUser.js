@@ -14,7 +14,7 @@ export default class NewUser extends React.Component {
     super(props);
     this.state = {
       name: '',
-      image_url: '',
+      image_url: ' ',
       phone: '',
       nameErr: false,
       urlErr: false,
@@ -22,6 +22,8 @@ export default class NewUser extends React.Component {
       trip_name: this.props.navigation.state.params.trip_name,
       trip_id: this.props.navigation.state.params.trip_id,
       updateUsers: this.props.navigation.state.params.updateUsers,
+      imageError: false,
+      load: false,
     };
   }
 
@@ -38,7 +40,7 @@ export default class NewUser extends React.Component {
       this.setState({ phoneErr: true, urlErr: true });
     } else if (!this.state.name) {
       this.setState({ nameErr: true });
-    } else if (!this.state.image_url) {
+    } else if (!this.state.image_url || !this.state.load) {
       this.setState({ urlErr: true });
     } else {
       fetch(`https://split-trip.herokuapp.com/users/`, {
@@ -73,6 +75,7 @@ export default class NewUser extends React.Component {
   }
 
   updateUrl = (e) => {
+    this.setState({ imageError: false, load: false });
     if (!e) {
       this.setState({ urlErr: true });
       this.setState({ image_url: e });
@@ -92,6 +95,16 @@ export default class NewUser extends React.Component {
     }
   }
 
+  imgErr = () => {
+    window.setTimeout(() => {
+      if (!this.state.load) this.setState({ imageError: true });
+    }, 1500);
+  }
+
+  imgErrClear = () => {
+    this.setState({ imageError: false, load: true });
+  }
+
   render() {
     return (
       <View style={styles.user}>
@@ -107,8 +120,13 @@ export default class NewUser extends React.Component {
         <FormLabel>Phone Number</FormLabel>
         <FormInput onChangeText={this.updatePhone} placeholder='0000000000'/>
         {this.state.phoneErr ? <FormValidationMessage>Please enter a 10 digit phone number</FormValidationMessage> : null}
-
-        <Image source={{uri: this.state.image_url}} />
+        <Text>{'\n\n\n'}</Text>
+        {
+          this.state.imageError
+            ? <Text style={{textAlign: 'center'}}>Could not load the image {'\n\n'} Please try another</Text>
+            : <Image source={{uri: this.state.image_url}} onError={this.imgErr} onLoad={this.imgErrClear} style={{width: 100,
+            height: 100}}/>
+        }
 
         <TouchableOpacity onPress={this.post} style={styles.newButton}>
           <Text>Add {this.state.name} to {this.state.trip_name}</Text>

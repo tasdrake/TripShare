@@ -143,8 +143,8 @@ export default class NewUser extends React.Component {
         {
           this.state.imageError
             ? <Text style={{textAlign: 'center'}}>Could not load the image {'\n\n'} Please try another</Text>
-            : <Image source={{uri: this.state.image_url}} onError={this.imgErr} onLoad={this.imgErrClear} style={{width: 75,
-            height: 75}}/>
+            : <Image source={{uri: this.state.image_url}} onError={this.imgErr} onLoad={this.imgErrClear} style={{width: 100,
+            height: 100}}/>
         }
 
 
