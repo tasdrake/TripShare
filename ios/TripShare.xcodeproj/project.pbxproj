@@ -489,11 +489,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-<<<<<<< HEAD
 		472E953F1F587E5C0037DB35 /* Recovered References */ = {
-=======
-		472E94B81F5860050037DB35 /* Recovered References */ = {
->>>>>>> a1eb6984ecaf6e05674742e45a8ff89fa3226c94
 			isa = PBXGroup;
 			children = (
 				422A7E49C794415DA058F5BB /* libRCTCamera.a */,
@@ -590,11 +586,7 @@
 				00E356EF1AD99517003FC87E /* TripShareTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				6F09AA447CB44056B66EE52E /* Resources */,
-<<<<<<< HEAD
 				472E953F1F587E5C0037DB35 /* Recovered References */,
-=======
-				472E94B81F5860050037DB35 /* Recovered References */,
->>>>>>> a1eb6984ecaf6e05674742e45a8ff89fa3226c94
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
