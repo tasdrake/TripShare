@@ -6,7 +6,6 @@ import { SearchBar } from 'react-native-elements';
 export default class Trips extends React.Component {
   static navigationOptions = {
      header: null,
-    //  headerBackTitle: 'Trips',
    }
 
   constructor(props) {
