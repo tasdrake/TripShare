@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
-
+// import MKTextField from 'react-native-material-kit';
 
 
 export default class NewTrip extends React.Component {
@@ -94,12 +94,12 @@ export default class NewTrip extends React.Component {
     return (
       <View style={styles.user}>
 
-        <FormLabel>Trip Name</FormLabel>
-        <FormInput onChangeText={this.updateName}/>
+        <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}}>Trip Name</FormLabel>
+        <FormInput onChangeText={this.updateName} containerStyle={{width: 350}}/>
         {this.state.nameErr ? <FormValidationMessage>Please enter a name for the trip</FormValidationMessage> : null}
 
-        <FormLabel>Image URL</FormLabel>
-        <FormInput onChangeText={this.updateUrl}/>
+        <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}}>Image URL</FormLabel>
+        <FormInput onChangeText={this.updateUrl}containerStyle={{width: 350}}/>
         {this.state.urlErr ? <FormValidationMessage>Please enter a URL for a picture for the trip</FormValidationMessage> : null}
         <Text>{'\n\n\n'}</Text>
         {

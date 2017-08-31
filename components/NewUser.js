@@ -28,6 +28,9 @@ export default class NewUser extends React.Component {
   }
 
   post = () => {
+    let phone = this.state.phone;
+    phone.split(/[)(-]/).join('');
+    this.setState({phone});
     if (this.state.phone.length !== 10) {
       this.setState({ phoneErr: true });
     } else if (!this.state.name && !this.state.image_url && !this.state.phone) {
@@ -90,6 +93,9 @@ export default class NewUser extends React.Component {
       this.setState({ phoneErr: true });
       this.setState({ phone: e });
     } else {
+      if (e.length === 1) e = '(' + e;
+      if (e.length === 4) e += ')';
+      if (e.length === 8) e += '-';
       this.setState({ phoneErr: false });
       this.setState({ phone: e });
     }
@@ -109,16 +115,16 @@ export default class NewUser extends React.Component {
     return (
       <View style={styles.user}>
 
-        <FormLabel>Name</FormLabel>
-        <FormInput onChangeText={this.updateName} />
+        <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}}>Name</FormLabel>
+        <FormInput onChangeText={this.updateName} containerStyle={{width: 350}} />
         {this.state.nameErr ? <FormValidationMessage>Please enter a name</FormValidationMessage> : null}
 
-        <FormLabel>Image URL</FormLabel>
-        <FormInput onChangeText={this.updateUrl} />
+        <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}}>Image URL</FormLabel>
+        <FormInput onChangeText={this.updateUrl} containerStyle={{width: 350}} />
         {this.state.urlErr ? <FormValidationMessage>Please enter a URL for the user icon</FormValidationMessage> : null}
 
-        <FormLabel>Phone Number</FormLabel>
-        <FormInput onChangeText={this.updatePhone} placeholder='0000000000'/>
+        <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}}>Phone Number</FormLabel>
+        <FormInput onChangeText={this.updatePhone} containerStyle={{width: 350}} />
         {this.state.phoneErr ? <FormValidationMessage>Please enter a 10 digit phone number</FormValidationMessage> : null}
         <Text>{'\n\n\n'}</Text>
         {
