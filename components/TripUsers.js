@@ -62,7 +62,7 @@ export default class TripUsers extends React.Component {
         <ScrollView>
           {
 
-            this.state.users.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)).map(e => {
+            this.state.users.sort((a, b) => (a.name > b.name) ? 1 : -1).map(e => {
               return (
                 <TouchableOpacity key={e.id} style={styles.users} onPress={() => navigate('Receipts', { user_id: e.id, updateUsers: this.updateUsers, trip_id: this.state.trip_id })}>
                   <Text style={styles.title}>{e.name}</Text>
