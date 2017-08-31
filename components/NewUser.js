@@ -108,6 +108,8 @@ export default class NewUser extends React.Component {
         <FormInput onChangeText={this.updatePhone} placeholder='0000000000'/>
         {this.state.phoneErr ? <FormValidationMessage>Please enter a 10 digit phone number</FormValidationMessage> : null}
 
+        <Image source={{uri: this.state.image_url}} />
+
         <TouchableOpacity onPress={this.post} style={styles.newButton}>
           <Text>Add {this.state.name} to {this.state.trip_name}</Text>
         </TouchableOpacity>

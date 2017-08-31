@@ -89,7 +89,7 @@ export default class NewTrip extends React.Component {
         <FormInput onChangeText={this.updateUrl}/>
         {this.state.urlErr ? <FormValidationMessage>Please enter a URL for a picture for the trip</FormValidationMessage> : null}
 
-
+        <Image source={{uri: this.state.image_url}} />
 
         <TouchableOpacity onPress={this.post} style={styles.newButton}>
           <Text>Create a New Trip</Text>

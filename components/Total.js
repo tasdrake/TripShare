@@ -62,7 +62,6 @@ export default class Total extends React.Component {
       }
     }
     this.setState({ trip_users });
-    console.log(e.paid);
     fetch(`https://split-trip.herokuapp.com/users/${e.id}`, {
       method: 'PATCH',
       headers: {
@@ -70,8 +69,6 @@ export default class Total extends React.Component {
         'Accept': 'application/json'
       },
       body: JSON.stringify({paid: e.paid})
-    }).then((res) => {
-      console.log(res);
     });
   }
 
