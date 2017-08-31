@@ -23,10 +23,12 @@ export default class NewTrip extends React.Component {
     super(props);
     this.state = {
       name: '',
-      image_url: '',
+      image_url: ' ',
       nameErr: false,
       urlErr: false,
       updateTrip: this.props.navigation.state.params.updateTrip,
+      imageError: false,
+      load: false,
     };
   }
 
@@ -35,7 +37,7 @@ export default class NewTrip extends React.Component {
       this.setState({ nameErr: true, urlErr: true });
     } else if (!this.state.name) {
       this.setState({ nameErr: true });
-    } else if (!this.state.image_url) {
+    } else if (!this.state.image_url || !this.state.load) {
       this.setState({ urlErr: true });
     } else {
       fetch(`https://split-trip.herokuapp.com/trips/`, {
@@ -67,6 +69,7 @@ export default class NewTrip extends React.Component {
   }
 
   updateUrl = (e) => {
+    this.setState({ imageError: false, load: false });
     if (!e) {
       this.setState({ urlErr: true });
       this.setState({ image_url: e });
@@ -75,6 +78,16 @@ export default class NewTrip extends React.Component {
       this.setState({ urlErr: false });
       this.setState({ image_url: e });
     }
+  }
+
+  imgErr = () => {
+    window.setTimeout(() => {
+      if (!this.state.load) this.setState({ imageError: true });
+    }, 1500);
+  }
+
+  imgErrClear = () => {
+    this.setState({ imageError: false, load: true });
   }
 
   render() {
@@ -88,8 +101,13 @@ export default class NewTrip extends React.Component {
         <FormLabel>Image URL</FormLabel>
         <FormInput onChangeText={this.updateUrl}/>
         {this.state.urlErr ? <FormValidationMessage>Please enter a URL for a picture for the trip</FormValidationMessage> : null}
-
-
+        <Text>{'\n\n\n'}</Text>
+        {
+          this.state.imageError
+            ? <Text style={{textAlign: 'center'}}>Could not load the image {'\n\n'} Please try another</Text>
+            : <Image source={{uri: this.state.image_url}} onError={this.imgErr} onLoad={this.imgErrClear} style={{width: 100,
+            height: 100}}/>
+        }
 
         <TouchableOpacity onPress={this.post} style={styles.newButton}>
           <Text>Create a New Trip</Text>
