@@ -21,7 +21,7 @@ export default class Receipts extends React.Component {
       user: {},
       user_id: this.props.navigation.state.params.user_id,
       trip_id: this.props.navigation.state.params.trip_id,
-      newAmount: 0,
+      newAmount: '',
       err: false,
       updateUsers: this.props.navigation.state.params.updateUsers,
       text: '',
@@ -39,11 +39,11 @@ export default class Receipts extends React.Component {
   }
 
   update = (e) => {
-    if (e < 0) {
+    if (Number(e) < 0) {
       this.setState({err: true});
     } else {
       this.setState({err: false});
-      this.setState({newAmount: e});
+      this.setState({newAmount: String(e)});
     }
   }
 
@@ -59,7 +59,7 @@ export default class Receipts extends React.Component {
         },
         body: JSON.stringify({amount_spent: amount})
       }).then(() => {
-        this.setState({newAmount: 0});
+        this.setState({newAmount: ''});
         this.props.navigation.goBack();
       });
     }
@@ -106,7 +106,7 @@ export default class Receipts extends React.Component {
               </View>
               <View style={styles.form}>
                 <FormLabel>Amount Spent</FormLabel>
-                <FormInput onChangeText={this.update} value={this.state.newAmount}/>
+                <FormInput keyboardType='numeric' onChangeText={this.update} value={this.state.newAmount}/>
                 {
                   this.state.err
                     ? <FormValidationMessage>Please enter a positive number</FormValidationMessage>
