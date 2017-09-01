@@ -17,7 +17,7 @@ class Splash extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      user: null
+      admin: null
     };
   }
   static navigationOptions = {
@@ -40,13 +40,13 @@ class Splash extends React.Component{
   handleOpenURL = ({ url }) => {
     const [, user_string] = url.match(/user=([^#]+)/);
     this.setState({
-      user: JSON.parse(decodeURI(user_string))
+      admin: JSON.parse(decodeURI(user_string))
     });
 
     if (Platform.OS === 'ios') {
       SafariView.addEventListener("onDismiss", () => {
         const {navigate} = this.props.navigation;
-        navigate('Trips', {user: this.state.user});
+        navigate('Trips', {admin: this.state.admin});
         }
       );
       SafariView.dismiss();
@@ -71,7 +71,7 @@ class Splash extends React.Component{
 
 
   render(){
-    const { user } = this.state;
+    const { admin } = this.state;
     const {navigate} = this.props.navigation;
 
     return (
@@ -79,7 +79,7 @@ class Splash extends React.Component{
         <View style={styles.content}>
           <Text>Welcome to TripShare {'\n'} login to create a trip or continue to see active trips</Text>
         </View>
-        <Button onPress={() => navigate('Trips', {user})} title='Go to trips'></Button>
+        <Button onPress={() => navigate('Trips', {admin})} title='Go to trips'></Button>
         {/* Login buttons */}
         <View style={styles.buttons}>
           <Icon.Button

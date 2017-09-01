@@ -10,7 +10,6 @@ import Camera from 'react-native-camera';
 import Spinner from 'react-native-loading-spinner-overlay';
 import axios from 'axios';
 import key from '../key';
-console.log(key);
 
 const cloudVisionKey = key;
 // Endpoints
@@ -74,13 +73,13 @@ export default class Picture extends React.Component {
 
         self.setTextContent(end);
       })
-      .catch(error => console.log(error, "error"));
+      .catch(error => console.error(error, "error"));
       })
       .catch(err => console.error(err));
   }
   setTextContent(textContent) {
     this.toggleLoader();
-    this.state.camera(textContent)
+    this.state.camera(textContent);
     this.props.navigation.goBack();
   }
 
