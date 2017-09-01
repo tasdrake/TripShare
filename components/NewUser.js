@@ -14,7 +14,7 @@ export default class NewUser extends React.Component {
     super(props);
     this.state = {
       name: '',
-      image_url: ' ',
+      image_url: 'https://cdn.pixabay.com/photo/2017/02/25/22/04/user-icon-2098873_1280.png',
       phone: '',
       nameErr: false,
       urlErr: false,

@@ -24,11 +24,8 @@ class Splash extends React.Component{
      header: null,
    }
 
-  // Set up Linking
   componentDidMount() {
-    // Add event listener to handle OAuthLogin:// URLs
     Linking.addEventListener('url', this.handleOpenURL);
-    // Launched from an external URL
     Linking.getInitialURL().then((url) => {
       if (url) {
         this.handleOpenURL({ url });
@@ -37,37 +34,39 @@ class Splash extends React.Component{
   }
 
   componentWillUnmount() {
-    // Remove event listener
     Linking.removeEventListener('url', this.handleOpenURL);
   }
 
   handleOpenURL = ({ url }) => {
-    // Extract stringified user string out of the URL
     const [, user_string] = url.match(/user=([^#]+)/);
     this.setState({
-      // Decode the user string and parse it into JSON
       user: JSON.parse(decodeURI(user_string))
     });
+
     if (Platform.OS === 'ios') {
+      SafariView.addEventListener("onDismiss", () => {
+        const {navigate} = this.props.navigation;
+        navigate('Trips', {user: this.state.user});
+        }
+      );
       SafariView.dismiss();
     }
   }
 
-  // Handle Login with Facebook button tap
   loginWithFacebook = () => this.openURL('https://split-trip.herokuapp.com/auth/facebook');
 
+
   openURL = (url) => {
-    // Use SafariView on iOS
-    if (Platform.OS === 'ios') {
-      SafariView.show({
-        url: url,
-        fromBottom: true,
-      });
-    }
-    // Or Linking.openURL on Android
-    else {
-      Linking.openURL(url);
-    }
+      if (Platform.OS === 'ios') {
+        SafariView.show({
+          url: url,
+          fromBottom: true,
+        });
+      }
+      else {
+        Linking.openURL(url);
+      }
+
   };
 
 
@@ -77,30 +76,9 @@ class Splash extends React.Component{
 
     return (
       <View style={styles.container}>
-        { user
-          ? // Show user info if already logged in
-            <View style={styles.content}>
-              <Text style={styles.header}>
-                Welcome {user.name}!
-              </Text>
-              <View style={styles.avatar}>
-                <Image source={{ uri: user.avatar }} style={styles.avatarImage} />
-              </View>
-            </View>
-          : // Show Please log in message if not
-            <View style={styles.content}>
-              <Text style={styles.header}>
-                Welcome Stranger!
-              </Text>
-              <View style={styles.avatar}>
-                <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" />
-              </View>
-              <Text style={styles.text}>
-                Please log in to continue {'\n'}
-                to the awesomness
-              </Text>
-            </View>
-        }
+        <View style={styles.content}>
+          <Text>Welcome to TripShare {'\n'} login to create a trip or continue to see active trips</Text>
+        </View>
         <Button onPress={() => navigate('Trips', {user})} title='Go to trips'></Button>
         {/* Login buttons */}
         <View style={styles.buttons}>

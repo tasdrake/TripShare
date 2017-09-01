@@ -61,16 +61,20 @@ export default class TripUsers extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <View>
-          <TouchableOpacity onPress={() => navigate('NewUser', { trip_name: this.state.name, trip_id: this.state.trip_id, updateUsers: this.updateUsers })}>
-            <Text style={styles.newUser}>Add Someone to {this.state.name}</Text>
-          </TouchableOpacity>
-        </View>
+        {
+          this.state.admin
+            ? <View>
+              <TouchableOpacity onPress={() => navigate('NewUser', { trip_name: this.state.name, trip_id: this.state.trip_id, updateUsers: this.updateUsers })}>
+                <Text style={styles.newUser}>Add Someone to {this.state.name}</Text>
+              </TouchableOpacity>
+            </View>
+            : null
+        }
         <SearchBar
           round
           lightTheme
           onChangeText={this.search}
-          placeholder='Search for someone' />
+          placeholder='Search for someone on the trip' />
         <ScrollView>
           {
 
