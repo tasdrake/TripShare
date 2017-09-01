@@ -128,16 +128,16 @@ export default class NewUser extends React.Component {
     return (
       <View style={styles.user}>
 
-        <FormLabel>Name</FormLabel>
-        <FormInput onChangeText={this.updateName} value={this.state.name}/>
+        <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}}>Name</FormLabel>
+        <FormInput onChangeText={this.updateName} value={this.state.name} containerStyle={{width: 350}}/>
         {this.state.nameErr ? <FormValidationMessage>Please enter a name</FormValidationMessage> : null}
 
-        <FormLabel>Image URL</FormLabel>
-        <FormInput onChangeText={this.updateUrl} value={this.state.image_url}/>
+        <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}}>Image URL</FormLabel>
+        <FormInput onChangeText={this.updateUrl} value={this.state.image_url} containerStyle={{width: 350}}/>
         {this.state.urlErr ? <FormValidationMessage>Please enter a URL for the user icon</FormValidationMessage> : null}
 
-        <FormLabel>Phone Number</FormLabel>
-        <FormInput onChangeText={this.updatePhone} value={this.state.phone}/>
+        <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}}>Phone Number</FormLabel>
+        <FormInput onChangeText={this.updatePhone} value={this.state.phone} containerStyle={{width: 350}}/>
         {this.state.phoneErr ? <FormValidationMessage>Please enter a 10 digit phone number</FormValidationMessage> : null}
         <Text>{'\n\n\n'}</Text>
         {

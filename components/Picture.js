@@ -9,8 +9,10 @@ import {
 import Camera from 'react-native-camera';
 import Spinner from 'react-native-loading-spinner-overlay';
 import axios from 'axios';
+import key from '../key';
+console.log(key);
 
-const cloudVisionKey = 'AIzaSyDfTUJmMudDKkZhnT8k1pddJgVckKkm_RY';
+const cloudVisionKey = key;
 // Endpoints
 const cloudVision  = 'https://vision.googleapis.com/v1/images:annotate?key=' + cloudVisionKey;
 
@@ -102,24 +104,7 @@ export default class Picture extends React.Component {
            />
         </TouchableHighlight>
       </Camera>
-      {/* <Modal
-       offset={0}
-       open={this.state.captureText}
-       modalDidOpen={() => {}}
-       modalDidClose={() => {}}
-       style={{alignItems: 'center'}}>
-       <View>
-          {
-            this.state.captureText ? <Text style={styles.descriptionText}>
-            {this.state.captureText}</Text> : null
-          }
-          <TouchableOpacity
-             style={{margin: 5}}
-             onPress={() => this.setState({captureText: null})}>
-             <Text>Try another</Text>
-          </TouchableOpacity>
-       </View>
-    </Modal> */}
+
     </View>
     );
   }
@@ -172,3 +157,25 @@ const styles = StyleSheet.create({
     marginBottom: 140
   }
 });
+
+
+
+
+{/* <Modal
+ offset={0}
+ open={this.state.captureText}
+ modalDidOpen={() => {}}
+ modalDidClose={() => {}}
+ style={{alignItems: 'center'}}>
+ <View>
+    {
+      this.state.captureText ? <Text style={styles.descriptionText}>
+      {this.state.captureText}</Text> : null
+    }
+    <TouchableOpacity
+       style={{margin: 5}}
+       onPress={() => this.setState({captureText: null})}>
+       <Text>Try another</Text>
+    </TouchableOpacity>
+ </View>
+</Modal> */}

@@ -7,8 +7,12 @@ import NewTrip from '../components/NewTrip';
 import NewUser from '../components/NewUser';
 import EditUser from '../components/EditUser';
 import Picture from '../components/Picture';
+import Splash from '../components/Splash';
 
 export const Root = StackNavigator({
+  Splash: {
+    screen: Splash
+  },
   Trips: {
     screen: Trips
   },
@@ -33,4 +37,5 @@ export const Root = StackNavigator({
   Picture: {
     screen: Picture
   },
+
 });
