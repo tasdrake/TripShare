@@ -25,6 +25,7 @@ export default class TripUsers extends React.Component {
       trip_id: this.props.navigation.state.params.trip_id,
       name: this.props.navigation.state.params.trip_name,
       text: '',
+      admin: this.props.navigation.state.params.user,
     };
   }
 
@@ -85,7 +86,7 @@ export default class TripUsers extends React.Component {
           }
         </ScrollView>
         <View>
-          <TouchableOpacity onPress={() => navigate('Total', { trip_id: this.state.trip_id })}>
+          <TouchableOpacity onPress={() => navigate('Total', { trip_id: this.state.trip_id, admin: this.state.admin })}>
             <Text style={styles.footer}>Total Trip</Text>
           </TouchableOpacity>
         </View>

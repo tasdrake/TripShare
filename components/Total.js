@@ -14,7 +14,8 @@ export default class Total extends React.Component {
     this.state = {
       trip_users: [],
       trip_id: this.props.navigation.state.params.trip_id,
-      totals: {}
+      totals: {},
+      admin: this.props.navigation.state.params.user,
     };
   }
   componentDidMount() {
@@ -39,16 +40,18 @@ export default class Total extends React.Component {
   }
 
   pay = (e) => {
-    const text = e.amount_owed < 0 ? `Did ${e.name} receive all money owed?` : `Did ${e.name} fully pay?`;
-    Alert.alert(
-      text,
-      null,
-      [
-        {text: 'No', onPress: () => this.update(e, false), style: 'cancel'},
-        {text: 'Yes', onPress: () => this.update(e, true)},
-      ],
-      { cancelable: false }
-    );
+    if (this.state.admin) {
+      const text = e.amount_owed < 0 ? `Did ${e.name} receive all money owed?` : `Did ${e.name} fully pay?`;
+      Alert.alert(
+        text,
+        null,
+        [
+          {text: 'No', onPress: () => this.update(e, false), style: 'cancel'},
+          {text: 'Yes', onPress: () => this.update(e, true)},
+        ],
+        { cancelable: false }
+      );
+    }
   }
 
   update = (e, bool) => {
@@ -90,7 +93,7 @@ export default class Total extends React.Component {
         </List>
 
         <View>
-          <TouchableOpacity onPress={() => navigate('Trips')}>
+          <TouchableOpacity onPress={() => navigate('Trips', {admin: this.state.admin})}>
             <Text style={styles.footer}>Search Other Trips</Text>
           </TouchableOpacity>
         </View>
