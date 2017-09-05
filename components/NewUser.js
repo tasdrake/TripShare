@@ -92,10 +92,16 @@ export default class NewUser extends React.Component {
     if (!e) {
       this.setState({ phoneErr: true });
       this.setState({ phone: e });
-    } else {
+    } else if (e.length > this.state.phone.length) {
       if (e.length === 1) e = '(' + e;
       if (e.length === 4) e += ')';
       if (e.length === 8) e += '-';
+      this.setState({ phoneErr: false });
+      this.setState({ phone: e });
+    } else {
+      if (e.length === 1) e = e.slice(0, e.length - 1);
+      if (e.length === 5) e = e.slice(0, e.length - 1);
+      if (e.length === 9) e = e.slice(0, e.length - 1);
       this.setState({ phoneErr: false });
       this.setState({ phone: e });
     }
@@ -124,7 +130,7 @@ export default class NewUser extends React.Component {
         {this.state.urlErr ? <FormValidationMessage>Please enter a URL for the user icon</FormValidationMessage> : null}
 
         <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}}>Phone Number</FormLabel>
-        <FormInput onChangeText={this.updatePhone} containerStyle={{width: 350}} />
+        <FormInput onChangeText={this.updatePhone} containerStyle={{width: 350}} value={this.state.phone}/>
         {this.state.phoneErr ? <FormValidationMessage>Please enter a 10 digit phone number</FormValidationMessage> : null}
         <Text>{'\n\n\n'}</Text>
         {
