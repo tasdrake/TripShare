@@ -13,7 +13,7 @@ export default class Trips extends React.Component {
     this.state = {
       trips: [],
       text: '',
-      admin: this.props.navigation.state.params.admin || [{id:0}],
+      admin: [this.props.navigation.state.params.admin],
     };
   }
   componentDidMount() {
@@ -26,8 +26,9 @@ export default class Trips extends React.Component {
     })
     .then(result => result.json())
     .then(trips => this.setState({ trips }));
-    if (!this.state.admin.id) {
-      fetch(`https://split-trip.herokuapp.com/login/${this.state.admin.name}`, {
+    if (this.state.admin[0].name) {
+      console.log('-----------------', this.state.admin[0].name);
+      fetch(`https://split-trip.herokuapp.com/login/${this.state.admin[0].name}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,8 +61,8 @@ export default class Trips extends React.Component {
       <View>
         <View>
           {
-            this.state.admin.id > 0
-              ? <TouchableOpacity onPress={() => navigate('NewTrip', { updateTrip: this.updateTrip })}>
+            this.state.admin[0].name
+              ? <TouchableOpacity onPress={() => navigate('NewTrip', { updateTrip: this.updateTrip, admin_id: this.state.admin[0].id })}>
                 <Text style={styles.newTrip}>Create a New Trip</Text>
               </TouchableOpacity>
               : null

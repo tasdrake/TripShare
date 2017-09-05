@@ -12,6 +12,7 @@ import axios from 'axios';
 import key from '../key';
 
 const cloudVisionKey = key;
+
 // Endpoints
 const cloudVision  = 'https://vision.googleapis.com/v1/images:annotate?key=' + cloudVisionKey;
 
@@ -67,9 +68,13 @@ export default class Picture extends React.Component {
       .then((response) => {
         const textAnnotations  = response.data.responses[0].textAnnotations[0];
         const textContent = textAnnotations.description;
-        const result = textContent.split(/[\n ]/).filter(e => (!!Number(e) && e.includes('.')));
-        let end = result[result.length - 1];
-        while(!Number(end[0])) end = end.slice(1);
+        const result = textContent.split(/[\n ]/).map(e => {
+          if (e.match(/[0-9]/)) {
+            while(!Number(e[0])) e = e.slice(1);
+          }
+          return e;
+        }).filter(e => (!!Number(e) && e.includes('.')));
+         let end = result[result.length - 1];
 
         self.setTextContent(end);
       })
