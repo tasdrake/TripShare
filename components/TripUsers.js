@@ -84,7 +84,9 @@ export default class TripUsers extends React.Component {
               return (
                 <TouchableOpacity key={e.id} style={styles.users} onPress={() => navigate('Receipts', { user_id: e.id, updateUsers: this.updateUsers, trip_id: this.state.trip_id })}>
                   <Text style={styles.title}>{e.name}</Text>
-                  <Image source={{uri: e.image_url}} style={styles.image} />
+                  <View key={e.id} style={styles.box}>
+                    <Image source={{uri: e.image_url}} style={styles.image} />
+                  </View>
                 </TouchableOpacity>
               );
             })
@@ -117,8 +119,10 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   image: {
-    width: 75,
-    height: 75,
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    overflow: 'hidden'
   },
   footer: {
     textAlign: 'center',
@@ -127,5 +131,11 @@ const styles = StyleSheet.create({
   newUser: {
     textAlign: 'center',
     marginTop: 10,
+  },
+  box: {
+    shadowOpacity: 0.7,
+    shadowOffset: {width: 1, height: 1},
+    borderRadius: 50,
+    // overflow: 'hidden'
   },
 });
