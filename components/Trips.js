@@ -5,9 +5,9 @@ import colors from '../css/colors';
 const {height, width} = Dimensions.get('window');
 
 export default class Trips extends React.Component {
-  // static navigationOptions = {
-  //    header: null,
-  //  }
+  static navigationOptions = {
+    //  header: null,
+   }
 
   constructor(props) {
     super(props);
@@ -61,20 +61,30 @@ export default class Trips extends React.Component {
       <View >
         <Image source={require('../css/road.jpg')} style={styles.backgroundimage}></Image>
 
-        <View>
+
           {
             this.state.admin[0].name
-              ? <TouchableOpacity onPress={() => navigate('NewTrip', { updateTrip: this.updateTrip, admin_id: this.state.admin[0].id })}>
-                <Text style={styles.newTrip}>Create a New Trip</Text>
-              </TouchableOpacity>
-              : null
+              ? <View style={styles.topContainer}>
+                  <TouchableOpacity onPress={() => navigate('NewTrip', { updateTrip: this.updateTrip, admin_id: this.state.admin[0].id })}>
+                    <Text style={styles.newTrip}>Create a New Trip</Text>
+                  </TouchableOpacity>
+                  <SearchBar
+                    round
+                    lightTheme
+                    onChangeText={this.search}
+                    placeholder='Search for a Specific Trip' />
+                </View>
+              : <SearchBar
+                round
+                lightTheme
+                onChangeText={this.search}
+                placeholder='Search for a Specific Trip' />
           }
-        </View>
-        <SearchBar
+        {/* <SearchBar
           round
           lightTheme
           onChangeText={this.search}
-          placeholder='Search for a Specific Trip' />
+          placeholder='Search for a Specific Trip' /> */}
         <ScrollView>
           {
             this.state.trips.filter(e => e.name.includes(this.state.text)).map(e => {
@@ -141,4 +151,7 @@ const styles = StyleSheet.create({
     // left: (Dimensions.get('window').width - 64) / 2,
     // borderRadius: 32,
   },
+  topContainer: {
+    flexWrap: 'nowrap'
+  }
 });
