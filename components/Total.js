@@ -15,7 +15,8 @@ export default class Total extends React.Component {
       trip_users: [],
       trip_id: this.props.navigation.state.params.trip_id,
       totals: {},
-      admin: this.props.navigation.state.params.user,
+      admin: this.props.navigation.state.params.admin,
+      admin_id: this.props.navigation.state.params.admin_id,
     };
   }
   componentDidMount() {
@@ -40,7 +41,7 @@ export default class Total extends React.Component {
   }
 
   pay = (e) => {
-    if (this.state.admin) {
+    if (this.state.admin[0].id === this.state.admin_id) {
       const text = e.amount_owed < 0 ? `Did ${e.name} receive all money owed?` : `Did ${e.name} fully pay?`;
       Alert.alert(
         text,

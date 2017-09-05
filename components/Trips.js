@@ -13,7 +13,7 @@ export default class Trips extends React.Component {
     this.state = {
       trips: [],
       text: '',
-      admin: this.props.navigation.state.params.user,
+      admin: [this.props.navigation.state.params.admin],
     };
   }
   componentDidMount() {
@@ -26,14 +26,14 @@ export default class Trips extends React.Component {
     })
     .then(result => result.json())
     .then(trips => this.setState({ trips }));
-    if (this.state.user) {
-      fetch('https://split-trip.herokuapp.com/login', {
+    if (this.state.admin[0].name) {
+      console.log('-----------------', this.state.admin[0].name);
+      fetch(`https://split-trip.herokuapp.com/login/${this.state.admin[0].name}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
-        body: JSON.stringify(this.state.user)
       })
       .then(res => res.json())
       .then(admin => this.setState({admin}));
@@ -56,12 +56,13 @@ export default class Trips extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
+    console.log(this.state.admin);
     return (
       <View>
         <View>
           {
-            this.state.admin
-              ? <TouchableOpacity onPress={() => navigate('NewTrip', { updateTrip: this.updateTrip })}>
+            this.state.admin[0].name
+              ? <TouchableOpacity onPress={() => navigate('NewTrip', { updateTrip: this.updateTrip, admin_id: this.state.admin[0].id })}>
                 <Text style={styles.newTrip}>Create a New Trip</Text>
               </TouchableOpacity>
               : null
@@ -76,7 +77,7 @@ export default class Trips extends React.Component {
           {
             this.state.trips.filter(e => e.name.includes(this.state.text)).map(e => {
               return (
-                <TouchableOpacity key={e.id} style={styles.trips} onPress={() => navigate('TripUsers', { trip_id: e.id, trip_name: e.name, admin: this.state.admin })}>
+                <TouchableOpacity key={e.id} style={styles.trips} onPress={() => navigate('TripUsers', { trip_id: e.id, trip_name: e.name, admin: this.state.admin, admin_id: e.admin_id })}>
                   <Text style={styles.title}>{e.name}</Text>
                   <Image source={{uri: e.image_url}} style={styles.image} />
                 </TouchableOpacity>

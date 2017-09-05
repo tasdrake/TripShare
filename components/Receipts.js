@@ -74,11 +74,7 @@ export default class Receipts extends React.Component {
       }
     }).then(result => result.json()).then(user => this.setState({user: user[0]}));
   }
-  camera = (newAmount) => {
-    console.log('new',newAmount);
-    this.setState({ newAmount });
-    console.log('state',this.state.newAmount);
-  }
+  camera = (newAmount) => this.setState({ newAmount });
 
   render() {
     const {navigate} = this.props.navigation;

@@ -29,6 +29,7 @@ export default class NewTrip extends React.Component {
       updateTrip: this.props.navigation.state.params.updateTrip,
       imageError: false,
       load: false,
+      admin_id: this.props.navigation.state.params.admin_id,
     };
   }
 
@@ -48,7 +49,8 @@ export default class NewTrip extends React.Component {
         },
         body: JSON.stringify({
           name: this.state.name,
-          image_url: this.state.image_url
+          image_url: this.state.image_url,
+          admin_id: this.state.admin_id
         })
       })
       .then(() => {
@@ -81,9 +83,7 @@ export default class NewTrip extends React.Component {
   }
 
   imgErr = () => {
-    window.setTimeout(() => {
-      if (!this.state.load) this.setState({ imageError: true });
-    }, 1500);
+    if (!this.state.load && this.state.image_url > 1) this.setState({ imageError: true });
   }
 
   imgErrClear = () => {
