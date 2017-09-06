@@ -105,8 +105,9 @@ export default class NewTrip extends React.Component {
         {
           this.state.imageError
             ? <Text style={{textAlign: 'center'}}>Could not load the image {'\n\n'} Please try another</Text>
-            : <Image source={{uri: this.state.image_url}} onError={this.imgErr} onLoad={this.imgErrClear} style={{width: 100,
-            height: 100}}/>
+            : <View style={styles.box}>
+                <Image source={{uri: this.state.image_url}} onError={this.imgErr} onLoad={this.imgErrClear} style={styles.image}/>
+              </View>
         }
 
         <TouchableOpacity onPress={this.post} style={styles.newButton}>
@@ -126,11 +127,19 @@ const styles = StyleSheet.create({
   image: {
     width: 100,
     height: 100,
+    borderRadius: 20,
+    overflow: 'hidden',
   },
   name: {
     fontSize: 80,
   },
   newButton: {
     marginTop: 50,
+  },
+  box: {
+    shadowOpacity: 0.7,
+    shadowOffset: {width: 1, height: 1},
+    borderRadius: 20,
+    // overflow: 'hidden'
   },
 });

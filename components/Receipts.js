@@ -82,13 +82,15 @@ export default class Receipts extends React.Component {
     return (
             <View style={styles.user}>
               <Text style={styles.name}>{this.state.user.name}</Text>
-              <Image source={{uri: this.state.user.image_url }} style={styles.image}/>
+              <View style={styles.box}>
+                <Image source={{uri: this.state.user.image_url }} style={styles.image}/>
+              </View>
               <TouchableOpacity onPress={() => navigate('EditUser', {
                 user_id: this.state.user_id,
                 updateUsers: this.state.updateUsers,
                 updateUser: this.updateUser
               })}>
-                <Text>Edit User</Text>
+                <Text style={{marginTop: 10}}>Edit User</Text>
               </TouchableOpacity>
               <View style={{
                 flex: 1,
@@ -130,7 +132,9 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 100,
-    height: 100
+    height: 100,
+    borderRadius: 50,
+    overflow: 'hidden',
   },
   name: {
     fontSize: 80
@@ -138,5 +142,11 @@ const styles = StyleSheet.create({
   form: {
     marginVertical: 30,
     paddingHorizontal: 15,
-  }
+  },
+  box: {
+    shadowOpacity: 0.7,
+    shadowOffset: {width: 1, height: 1},
+    borderRadius: 50,
+    // overflow: 'hidden'
+  },
 });

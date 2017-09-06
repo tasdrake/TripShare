@@ -77,7 +77,7 @@ class Splash extends React.Component {
     return (
       <View style={styles.container}>
 
-        <Image source={require('./road.jpg')} style={styles.image}></Image>
+        <Image source={require('../css/road.jpg')} style={styles.image}></Image>
         <View style={styles.container}>
           <View style={styles.content}>
             {/* <Text style={styles.title}>Welcome to TripShare {'\n'}</Text> */}
@@ -163,7 +163,9 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     padding: 12,
     borderRadius: 10,
-    width: 150
+    width: 150,
+    overflow: 'hidden',
+
   },
   buttonText: {
     textAlign: 'center',
