@@ -57,7 +57,7 @@ export default class TripUsers extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View style={styles.container, {paddingTop: 60}}>
+      <View style={styles.container}>
         {/* <Image source={this.state.trip_id === 2 ? require('../css/e2.jpg') : {uri: this.state.image_url}} style={styles.backgroundimage}></Image> */}
         <Image source={require('../css/background2.png')} style={styles.backgroundimage}></Image>
 
@@ -120,7 +120,8 @@ export default class TripUsers extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    paddingTop: 60,
   },
   title: {
     fontSize: 20,
