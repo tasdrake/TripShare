@@ -6,13 +6,15 @@ import {
   Image,
   TouchableOpacity,
   Button,
+  Dimensions,
 } from 'react-native';
 import {FormLabel, FormInput, FormValidationMessage} from 'react-native-elements';
+const {height, width} = Dimensions.get('window');
 
 export default class Receipts extends React.Component {
   static navigationOptions = {
-    // header: null,
-    // title: 'Receipts',
+    headerStyle:{ position: 'absolute', backgroundColor: 'transparent',  top: 0, left: 0, right: 0, borderBottomWidth: 0,},
+    headerTintColor: '#e4ad5a',
   };
 
   constructor(props) {
@@ -81,6 +83,8 @@ export default class Receipts extends React.Component {
     let {image} = this.state;
     return (
             <View style={styles.user}>
+              <Image source={require('../css/background2.png')} style={styles.backgroundimage}></Image>
+
               <Text style={styles.name}>{this.state.user.name}</Text>
               <View style={styles.box}>
                 <Image source={{uri: this.state.user.image_url }} style={styles.image}/>
@@ -90,29 +94,31 @@ export default class Receipts extends React.Component {
                 updateUsers: this.state.updateUsers,
                 updateUser: this.updateUser
               })}>
-                <Text style={{marginTop: 10}}>Edit User</Text>
+                <Text style={styles.editButton}>Edit User</Text>
               </TouchableOpacity>
               <View style={{
                 flex: 1,
                 alignItems: 'center',
                 justifyContent: 'center'
               }}>
-                <Button title="Take a picture of the receipt" onPress={() => navigate('Picture', { camera: this.camera })}/>
+                <TouchableOpacity onPress={() => navigate('Picture', { camera: this.camera })}>
+                  <Text style={styles.button}>Take a picture of the receipt</Text>
+                </TouchableOpacity>
                 {
                   image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }}/>
                 }
               </View>
               <View style={styles.form}>
-                <FormLabel>Amount Spent</FormLabel>
-                <FormInput keyboardType='numeric' onChangeText={this.update} value={this.state.newAmount}/>
+                <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}} labelStyle={{color: '#ffd391', backgroundColor: 'transparent'}}>Amount Spent</FormLabel>
+                <FormInput keyboardType='numeric' onChangeText={this.update} value={this.state.newAmount} containerStyle={{width: 350, borderBottomColor: '#ffd391'}} placeholderTextColor='#ffd391' inputStyle={{color: '#ffd391'}} />
                 {
                   this.state.err
-                    ? <FormValidationMessage>Please enter a positive number</FormValidationMessage>
+                    ? <FormValidationMessage labelStyle={{color: '#f46319', backgroundColor: 'transparent'}}>Please enter a positive number</FormValidationMessage>
                     : null
                 }
               </View>
               <TouchableOpacity onPress={this.post}>
-                <Text>Add New Receipt</Text>
+                <Text style={styles.addButton}>Add New Receipt</Text>
               </TouchableOpacity>
       </View>
     );
@@ -128,7 +134,8 @@ const styles = StyleSheet.create({
   user: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingTop: 60,
   },
   image: {
     width: 100,
@@ -137,7 +144,9 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   name: {
-    fontSize: 80
+    fontSize: 80,
+    color: '#ffd391',
+    backgroundColor: 'transparent'
   },
   form: {
     marginVertical: 30,
@@ -149,4 +158,58 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     // overflow: 'hidden'
   },
+  backgroundimage: {
+    position: 'absolute',
+    height,
+    width,
+    // opacity: 0.3
+    // left: (Dimensions.get('window').width - 64) / 2,
+    // borderRadius: 32,
+  },
+  button: {
+    marginTop: 50,
+    textAlign: 'center',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#e4ad5a',
+    backgroundColor: '#e4ad5a',
+    padding: 12,
+    borderRadius: 10,
+    overflow: 'hidden',
+    justifyContent: 'center',
+    fontSize: 16,
+    color: '#2a0001',
+    fontWeight: 'bold'
+  },
+  editButton: {
+    marginTop: 10,
+    textAlign: 'center',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#e4ad5a',
+    backgroundColor: '#e4ad5a',
+    paddingVertical: 2,
+    paddingHorizontal: 5,
+    borderRadius: 10,
+    overflow: 'hidden',
+    justifyContent: 'center',
+    fontSize: 12,
+    color: '#2a0001',
+    fontWeight: 'bold'
+  },
+  addButton: {
+    marginTop: 20,
+    textAlign: 'center',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#e4ad5a',
+    backgroundColor: '#e4ad5a',
+    padding: 12,
+    borderRadius: 10,
+    overflow: 'hidden',
+    justifyContent: 'center',
+    fontSize: 16,
+    color: '#2a0001',
+    fontWeight: 'bold'
+  }
 });

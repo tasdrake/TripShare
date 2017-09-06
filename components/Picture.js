@@ -18,14 +18,8 @@ const cloudVision  = 'https://vision.googleapis.com/v1/images:annotate?key=' + c
 
 export default class Picture extends React.Component {
   static navigationOptions = {
-    headerStyle: {
-      backgroundColor: 'rgba(255, 255, 255, 0)',
-    },
-    headerBackTitleStyle: {
-    },
-    // headerTintColor: 'black',
-    headerTitleStyle: {
-    }
+    headerStyle:{ position: 'absolute', backgroundColor: 'transparent',  top: 0, left: 0, right: 0, borderBottomWidth: 0,},
+    headerTintColor: '#e4ad5a',
   };
 
   constructor(props) {

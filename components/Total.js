@@ -1,12 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, Alert, Dimensions } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { List, ListItem } from 'react-native-elements';
+const {height, width} = Dimensions.get('window');
 
 export default class Total extends React.Component {
   static navigationOptions = {
-    // header: null,
-    // title: 'Total',
+    headerStyle:{ position: 'absolute', backgroundColor: 'transparent',  top: 0, left: 0, right: 0, borderBottomWidth: 0,},
+    headerTintColor: '#e4ad5a',
   };
 
   constructor(props) {
@@ -80,20 +81,23 @@ export default class Total extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <List containerStyle={{marginBottom: 20, marginTop: 0}}>
-          <ListItem hideChevron title={`Trip cost: $${this.state.totals.total}`} rightTitle={`Individual cost: $${this.state.totals.individualCost}`} rightTitleStyle={{color: 'black', fontSize: 15}} titleStyle={{color: 'black', fontSize: 15}}/>
+        <Image source={require('../css/background2.png')} style={styles.backgroundimage}></Image>
+        <List containerStyle={{marginBottom: 20, marginTop: 0, backgroundColor: 'transparent', borderColor: '#e4ad5a', borderBottomColor: '#e4ad5a'}}>
+          <ListItem hideChevron title={`Trip cost: $${this.state.totals.total}`} rightTitle={`Individual cost: $${this.state.totals.individualCost}`} rightTitleStyle={{color: '#ffd391', fontSize: 18}} titleStyle={{color: '#ffd391', fontSize: 18}} containerStyle={{backgroundColor: 'rgba(255,255,255,0.2)', borderColor: '#e4ad5a', borderBottomColor: '#e4ad5a'}}/>
           {
             this.state.trip_users.sort((a, b) => (a.name > b.name) ? 1 : -1).map(e => {
-              const color = Number(e.amount_owed) > 0 ? 'red' : 'green';
+              const color = Number(e.amount_owed) > 0 ? 'rgb(249, 67, 0)' : 'rgb(33, 219, 2)';
               const amount = Number(e.amount_owed) > 0 ? e.amount_owed : e.amount_owed.slice(1);
+              const touchColor = this.state.admin[0].id === this.state.admin_id ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.2)';
               return (
-                <ListItem roundAvatar avatar={{ uri: e.image_url }} key={e.id} title={e.name} rightTitle={amount} rightTitleStyle={{color}} hideChevron subtitle={e.paid ? 'paid' : null} onPress={() => this.pay(e)} subtitleStyle={{fontSize: 12}}/>
+                <ListItem roundAvatar avatar={{ uri: e.image_url }} key={e.id} title={e.name} titleStyle={{color: '#ffd391', fontSize: 18}} rightTitle={amount} rightTitleStyle={{color, fontSize: 18}} hideChevron subtitle={e.paid ? 'paid' : null}
+                onPress={() => this.pay(e)} subtitleStyle={{fontSize: 14, color: '#e4ad5a'}} containerStyle={{backgroundColor: 'rgba(255,255,255,0.2)', borderColor: '#e4ad5a', borderBottomColor: '#e4ad5a'}} underlayColor={touchColor} />
               );
             })
           }
         </List>
 
-        <View>
+        <View style={{alignItems: 'center'}}>
           <TouchableOpacity onPress={() => navigate('Trips', {admin: this.state.admin})}>
             <Text style={styles.footer}>Search Other Trips</Text>
           </TouchableOpacity>
@@ -105,11 +109,24 @@ export default class Total extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    paddingTop: 60,
   },
   footer: {
     textAlign: 'center',
-    marginBottom: 10,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#e4ad5a',
+    backgroundColor: '#e4ad5a',
+    padding: 12,
+    borderRadius: 10,
+    overflow: 'hidden',
+    justifyContent: 'center',
+    fontSize: 16,
+    color: '#2a0001',
+    fontWeight: 'bold',
+    width: 200,
+    marginTop: 10,
   },
   people: {
     flex: 1,
@@ -123,5 +140,11 @@ const styles = StyleSheet.create({
   },
   negative: {
     color: 'red'
-  }
+  },
+  backgroundimage: {
+    position: 'absolute',
+    height,
+    width,
+    // opacity: 0.3
+  },
 });
