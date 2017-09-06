@@ -11,8 +11,8 @@ import {FormLabel, FormInput, FormValidationMessage} from 'react-native-elements
 
 export default class Receipts extends React.Component {
   static navigationOptions = {
-    // header: null,
-    // title: 'Receipts',
+    headerStyle:{ position: 'absolute', backgroundColor: 'transparent',  top: 0, left: 0, right: 0, borderBottomWidth: 0,},
+    headerTintColor: '#e4ad5a',
   };
 
   constructor(props) {

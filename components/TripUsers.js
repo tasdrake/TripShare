@@ -1,21 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
 import { SearchBar } from 'react-native-elements';
+const {height, width} = Dimensions.get('window');
+
 
 
 export default class TripUsers extends React.Component {
   static navigationOptions = {
-    // header: null,
-    // headerBackTitle: this.state.name,
-    // headerBackTitle: this.state.name,
-    headerStyle: {
-      // backgroundColor: 'white',
-    },
-    headerBackTitleStyle: {
-    },
-    // headerTintColor: 'black',
-    headerTitleStyle: {
-    }
+    headerStyle:{ position: 'absolute', backgroundColor: 'transparent',  top: 0, left: 0, right: 0, borderBottomWidth: 0,},
+    headerTintColor: '#e4ad5a',
   };
 
   constructor(props) {
@@ -27,6 +20,7 @@ export default class TripUsers extends React.Component {
       text: '',
       admin: this.props.navigation.state.params.admin,
       admin_id: this.props.navigation.state.params.admin_id,
+      image_url: this.props.navigation.state.params.image_url,
     };
   }
 
@@ -62,6 +56,7 @@ export default class TripUsers extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
+        <Image source={this.state.trip_id === 2 ? require('../css/e2.jpg') : {uri: this.state.image_url}} style={styles.backgroundimage}></Image>
         {
           this.state.admin[0].id === this.state.admin_id
             ? <View>
@@ -77,20 +72,27 @@ export default class TripUsers extends React.Component {
           onChangeText={this.search}
           placeholder='Search for someone on the trip' />
         <ScrollView>
+          <View style={{alignItems: 'center', marginTop: 20}}>
+
+
           {
 
 
             this.state.users.filter(e => e.name.includes(this.state.text)).sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)).map(e => {
               return (
-                <TouchableOpacity key={e.id} style={styles.users} onPress={() => navigate('Receipts', { user_id: e.id, updateUsers: this.updateUsers, trip_id: this.state.trip_id })}>
-                  <Text style={styles.title}>{e.name}</Text>
-                  <View key={e.id} style={styles.box}>
-                    <Image source={{uri: e.image_url}} style={styles.image} />
+                <TouchableOpacity key={e.id} style={styles.boxContainer}>
+
+                  <View  style={styles.users} onPress={() => navigate('Receipts', { user_id: e.id, updateUsers: this.updateUsers, trip_id: this.state.trip_id })}>
+                    <Text style={styles.title}>{e.name}</Text>
+                    <View key={e.id} style={styles.box}>
+                      <Image source={{uri: e.image_url}} style={styles.image} />
+                    </View>
                   </View>
                 </TouchableOpacity>
               );
             })
           }
+          </View>
         </ScrollView>
         <View>
           <TouchableOpacity onPress={() => navigate('Total', { trip_id: this.state.trip_id, admin: this.state.admin, admin_id: this.state.admin_id })}>
@@ -108,21 +110,23 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    marginBottom: 20,
+    marginBottom: 10,
     textAlign: 'center',
+    color: '#ffd391'
   },
   users: {
     marginVertical: 40,
     flex: 1,
-    flexWrap: 'wrap',
+    flexWrap: 'nowrap',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    flexDirection: 'column'
   },
   image: {
     width: 100,
     height: 100,
     borderRadius: 50,
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   footer: {
     textAlign: 'center',
@@ -137,5 +141,21 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 1, height: 1},
     borderRadius: 50,
     // overflow: 'hidden'
+  },
+  backgroundimage: {
+    position: 'absolute',
+    height,
+    width,
+    // opacity: 0.3
+  },
+  boxContainer: {
+    shadowOpacity: 0.7,
+    shadowOffset: {width: 1, height: 1},
+    borderRadius: 20,
+    width: 150,
+    height: 150,
+    overflow: 'hidden',
+    marginVertical: 10,
+    backgroundColor: '#3e2e26'
   },
 });

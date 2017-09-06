@@ -5,8 +5,8 @@ import { List, ListItem } from 'react-native-elements';
 
 export default class Total extends React.Component {
   static navigationOptions = {
-    // header: null,
-    // title: 'Total',
+    headerStyle:{ position: 'absolute', backgroundColor: 'transparent',  top: 0, left: 0, right: 0, borderBottomWidth: 0,},
+    headerTintColor: '#e4ad5a',
   };
 
   constructor(props) {

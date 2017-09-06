@@ -14,6 +14,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
 import colors from '../css/colors';
 // import client_id from '../key';
+import LinearGradient from 'react-native-linear-gradient';
 
 const {height, width} = Dimensions.get('window');
 
@@ -75,13 +76,14 @@ class Splash extends React.Component {
     const {navigate} = this.props.navigation;
 
     return (
-      <View style={styles.container}>
-
-        <Image source={require('../css/road.jpg')} style={styles.image}></Image>
         <View style={styles.container}>
-          <View style={styles.content}>
-            {/* <Text style={styles.title}>Welcome to TripShare {'\n'}</Text> */}
-            {/* <View style={styles.box}>
+
+          {/* <Image source={require('../css/road.jpg')} style={styles.image}></Image> */}
+          <Image source={require('../css/background2.png')} style={styles.image}></Image>
+          <View style={styles.container}>
+            <View style={styles.content}>
+              {/* <Text style={styles.title}>Welcome to TripShare {'\n'}</Text> */}
+              {/* <View style={styles.box}>
               <Text>login</Text>
             </View> */}
             <Text style={styles.title} shadowOffset={{width: 10, height: 10}} shadowColor='black'>login to create a trip or continue to all see active trips</Text>
@@ -95,7 +97,6 @@ class Splash extends React.Component {
               <Text style={styles.buttonText}>Go to trips</Text>
             </TouchableOpacity>
           </View>
-
         </View>
       </View>
     );
@@ -160,7 +161,8 @@ const styles = StyleSheet.create({
   tripButton: {
     borderStyle: 'solid',
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: '#e4ad5a',
+    backgroundColor: '#e4ad5a',
     padding: 12,
     borderRadius: 10,
     width: 150,
@@ -170,14 +172,15 @@ const styles = StyleSheet.create({
   buttonText: {
     textAlign: 'center',
     fontSize: 16,
-    color: 'black',
-    backgroundColor: 'transparent'
+color: '#2a0001',
+    backgroundColor: 'transparent',
+    fontWeight: 'bold'
   },
   image: {
     position: 'absolute',
     height,
     width,
-    opacity: 0.3
+    // opacity: 0.3
     // left: (Dimensions.get('window').width - 64) / 2,
     // borderRadius: 32,
   },
@@ -186,7 +189,8 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 100/2,
     backgroundColor: 'red'
-  }
+  },
+
 });
 
 export default Splash;

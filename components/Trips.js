@@ -9,7 +9,7 @@ export default class Trips extends React.Component {
   static navigationOptions = {
     //  header: null,
      headerStyle:{ position: 'absolute', backgroundColor: 'transparent',  top: 0, left: 0, right: 0, borderBottomWidth: 0,},
-
+     headerTintColor: '#e4ad5a',
 
    }
 
@@ -63,7 +63,8 @@ export default class Trips extends React.Component {
     return (
       // style={{backgroundColor: colors.lightblue}}
       <View style={{paddingTop: 60}}>
-        <Image source={require('../css/road.jpg')} style={styles.backgroundimage}></Image>
+        {/* <Image source={require('../css/road.jpg')} style={styles.backgroundimage}></Image> */}
+        <Image source={require('../css/background2.png')} style={styles.backgroundimage}></Image>
 
 
           {
@@ -72,7 +73,7 @@ export default class Trips extends React.Component {
                   <TouchableOpacity onPress={() => navigate('NewTrip', { updateTrip: this.updateTrip, admin_id: this.state.admin[0].id })}>
                     <Text style={styles.newTrip}>New Trip</Text>
                   </TouchableOpacity>
-                  <FormInput placeholder='Search for trips' onChangeText={this.search} containerStyle={{width: 250, marginTop: 10}}/>
+                  <FormInput placeholder='Search for trips' placeholderTextColor='#ffd391' onChangeText={this.search} containerStyle={styles.search, {width: 230, borderBottomColor: '#ffd391'}} inputStyle={{color: '#ffd391', marginTop: 15}} />
                   {/* <SearchBar
                     round
                     lightTheme
@@ -80,7 +81,7 @@ export default class Trips extends React.Component {
                     placeholder='Search for a Specific Trip' /> */}
                 </View>
               : <View>
-                  <FormInput placeholder='Search for trips' onChangeText={this.search}/>
+                  <FormInput placeholder='Search for trips' placeholderTextColor='#ffd391' onChangeText={this.search} containerStyle={styles.search} inputStyle={{color: '#ffd391'}} />
                 </View>
           }
         {/* <SearchBar
@@ -92,7 +93,7 @@ export default class Trips extends React.Component {
           {
             this.state.trips.filter(e => e.name.includes(this.state.text)).map(e => {
               return (
-                  <TouchableOpacity key={e.id} style={styles.trips} onPress={() => navigate('TripUsers', { trip_id: e.id, trip_name: e.name, admin: this.state.admin, admin_id: e.admin_id })}>
+                  <TouchableOpacity key={e.id} style={styles.trips} onPress={() => navigate('TripUsers', { trip_id: e.id, trip_name: e.name, admin: this.state.admin, admin_id: e.admin_id, image_url: e.image_url })}>
                     <Text style={styles.title}>{e.name}</Text>
                     <View key={e.id} style={styles.box}>
                     <Image source={e.id === 2 ? require('../css/e2.jpg') : {uri: e.image_url}} style={styles.image} />
@@ -112,7 +113,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 20,
     textAlign: 'center',
-    color: colors.green,
+    color: '#ffd391',
     backgroundColor: 'transparent'
   },
   trips: {
@@ -132,15 +133,18 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     borderStyle: 'solid',
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: '#e4ad5a',
+    backgroundColor: '#e4ad5a',
     padding: 12,
     borderRadius: 10,
-    width: 85,
+    width: 100,
     overflow: 'hidden',
-    backgroundColor: 'transparent',
     justifyContent: 'center',
     marginLeft: 10,
-    marginTop: 10
+    marginTop: 10,
+    fontSize: 16,
+    color: '#2a0001',
+    fontWeight: 'bold'
   },
   box: {
     shadowOpacity: 0.7,
@@ -152,7 +156,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     height,
     width,
-    opacity: 0.3
+    // opacity: 0.3
     // left: (Dimensions.get('window').width - 64) / 2,
     // borderRadius: 32,
   },
@@ -160,5 +164,8 @@ const styles = StyleSheet.create({
     flexWrap: 'nowrap',
     flexDirection: 'row',
 
+  },
+  search: {
+    borderBottomColor: '#ffd391',
   }
 });
