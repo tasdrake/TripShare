@@ -1,13 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
 import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
+const {height, width} = Dimensions.get('window');
 
 
 
 export default class NewUser extends React.Component {
   static navigationOptions = {
-    // header: null,
-    // title: 'Receipts',
+    headerStyle:{ position: 'absolute', backgroundColor: 'transparent',  top: 0, left: 0, right: 0, borderBottomWidth: 0,},
+    headerTintColor: '#e4ad5a',
   };
 
   constructor(props) {
@@ -29,7 +30,11 @@ export default class NewUser extends React.Component {
   }
 
   post = () => {
-    if (this.state.phone.length !== 10) {
+    let phone = this.state.phone;
+    phone = phone.split(/[)(-]/g).join('');
+    // this.setState({phone});
+    console.log(phone);
+    if (phone.length !== 10) {
       this.setState({ phoneErr: true });
     } else if (!this.state.name && !this.state.image_url && !this.state.phone) {
       this.setState({ nameErr: true, urlErr: true, phoneErr: true });
@@ -44,6 +49,7 @@ export default class NewUser extends React.Component {
     } else if (!this.state.image_url || !this.state.load) {
       this.setState({ urlErr: true });
     } else {
+      console.log('patch');
       fetch(`https://split-trip.herokuapp.com/users/${this.state.user_id}`, {
         method: 'PATCH',
         headers: {
@@ -53,7 +59,7 @@ export default class NewUser extends React.Component {
         body: JSON.stringify({
           name: this.state.name,
           image_url: this.state.image_url,
-          phone: this.state.phone,
+          phone,
         })
       })
       .then(res => res.json())
@@ -75,10 +81,13 @@ export default class NewUser extends React.Component {
     })
     .then(result => result.json())
     .then(user => {
+      let phone = user[0].phone;
+      phone = '(' + phone.slice(0, 3) + ')' + phone.slice(3, 6) + '-' + phone.slice(6, 10);
+      
       this.setState({
         name: user[0].name,
         image_url: user[0].image_url,
-        phone: user[0].phone
+        phone
       });
     });
   }
@@ -108,7 +117,20 @@ export default class NewUser extends React.Component {
     if (!e) {
       this.setState({ phoneErr: true });
       this.setState({ phone: e });
+    } else if (isNaN(Number(e.split(/[)(-]/).join('')))) {
+      return;
+    } else if (e.length > 13) {
+      return;
+    } else if (e.length > this.state.phone.length) {
+      if (e.length === 1) e = '(' + e;
+      if (e.length === 4) e += ')';
+      if (e.length === 8) e += '-';
+      this.setState({ phoneErr: false });
+      this.setState({ phone: e });
     } else {
+      if (e.length === 1) e = e.slice(0, e.length - 1);
+      if (e.length === 5) e = e.slice(0, e.length - 1);
+      if (e.length === 9) e = e.slice(0, e.length - 1);
       this.setState({ phoneErr: false });
       this.setState({ phone: e });
     }
@@ -127,18 +149,19 @@ export default class NewUser extends React.Component {
   render() {
     return (
       <View style={styles.user}>
+        <Image source={require('../css/background2.png')} style={styles.backgroundimage}></Image>
 
-        <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}}>Name</FormLabel>
-        <FormInput onChangeText={this.updateName} value={this.state.name} containerStyle={{width: 350}}/>
-        {this.state.nameErr ? <FormValidationMessage>Please enter a name</FormValidationMessage> : null}
+        <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}} labelStyle={{color: '#ffd391', backgroundColor: 'transparent'}}>Name</FormLabel>
+        <FormInput onChangeText={this.updateName} value={this.state.name} containerStyle={{width: 350, borderBottomColor: '#ffd391'}} placeholderTextColor='#ffd391' inputStyle={{color: '#ffd391'}} />
+        {this.state.nameErr ? <FormValidationMessage  labelStyle={{color: '#f46319', backgroundColor: 'transparent'}}>Please enter a name</FormValidationMessage> : null}
 
-        <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}}>Image URL</FormLabel>
-        <FormInput onChangeText={this.updateUrl} value={this.state.image_url} containerStyle={{width: 350}}/>
-        {this.state.urlErr ? <FormValidationMessage>Please enter a URL for the user icon</FormValidationMessage> : null}
+        <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}} labelStyle={{color: '#ffd391', backgroundColor: 'transparent'}}>Image URL</FormLabel>
+        <FormInput onChangeText={this.updateUrl} value={this.state.image_url} containerStyle={{width: 350, borderBottomColor: '#ffd391'}} placeholderTextColor='#ffd391' inputStyle={{color: '#ffd391'}} />
+        {this.state.urlErr ? <FormValidationMessage  labelStyle={{color: '#f46319', backgroundColor: 'transparent'}}>Please enter a URL for the user icon</FormValidationMessage> : null}
 
-        <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}}>Phone Number</FormLabel>
-        <FormInput onChangeText={this.updatePhone} value={this.state.phone} containerStyle={{width: 350}}/>
-        {this.state.phoneErr ? <FormValidationMessage>Please enter a 10 digit phone number</FormValidationMessage> : null}
+        <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}} labelStyle={{color: '#ffd391', backgroundColor: 'transparent'}}>Phone Number</FormLabel>
+        <FormInput onChangeText={this.updatePhone} value={this.state.phone} containerStyle={{width: 350, borderBottomColor: '#ffd391'}} placeholderTextColor='#ffd391' inputStyle={{color: '#ffd391'}} />
+        {this.state.phoneErr ? <FormValidationMessage  labelStyle={{color: '#f46319', backgroundColor: 'transparent'}}>Please enter a 10 digit phone number</FormValidationMessage> : null}
         <Text>{'\n\n\n'}</Text>
         {
           this.state.imageError
@@ -149,8 +172,8 @@ export default class NewUser extends React.Component {
         }
 
 
-        <TouchableOpacity onPress={this.post} style={styles.newButton}>
-          <Text>Edit {this.state.name}</Text>
+        <TouchableOpacity onPress={this.post}>
+          <Text style={styles.newButton}>Edit {this.state.name}</Text>
         </TouchableOpacity>
       </View>
     );
@@ -174,11 +197,31 @@ const styles = StyleSheet.create({
   },
   newButton: {
     marginTop: 50,
+    textAlign: 'center',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#e4ad5a',
+    backgroundColor: '#e4ad5a',
+    padding: 12,
+    borderRadius: 10,
+    overflow: 'hidden',
+    justifyContent: 'center',
+    fontSize: 16,
+    color: '#2a0001',
+    fontWeight: 'bold'
   },
   box: {
     shadowOpacity: 0.7,
     shadowOffset: {width: 1, height: 1},
     borderRadius: 50,
     // overflow: 'hidden'
+  },
+  backgroundimage: {
+    position: 'absolute',
+    height,
+    width,
+    // opacity: 0.3
+    // left: (Dimensions.get('window').width - 64) / 2,
+    // borderRadius: 32,
   },
 });

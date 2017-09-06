@@ -80,7 +80,7 @@ export default class Trips extends React.Component {
                     onChangeText={this.search}
                     placeholder='Search for a Specific Trip' /> */}
                 </View>
-              : <View>
+              : <View style={styles.topContainer}>
                   <FormInput placeholder='Search for trips' placeholderTextColor='#ffd391' onChangeText={this.search} containerStyle={styles.search} inputStyle={{color: '#ffd391'}} />
                 </View>
           }
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
   topContainer: {
     flexWrap: 'nowrap',
     flexDirection: 'row',
-
+    marginBottom: 10,
   },
   search: {
     borderBottomColor: '#ffd391',
