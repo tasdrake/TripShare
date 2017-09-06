@@ -83,7 +83,12 @@ export default class NewTrip extends React.Component {
   }
 
   imgErr = () => {
-    if (!this.state.load && this.state.image_url > 1) this.setState({ imageError: true });
+    console.log('err1');
+    console.log(this.state.image_url.length > 1);
+    if (!this.state.load && this.state.image_url.length > 1) {
+      this.setState({ imageError: true });
+      console.log('err2');
+    }
   }
 
   imgErrClear = () => {
@@ -99,13 +104,14 @@ export default class NewTrip extends React.Component {
         {this.state.nameErr ? <FormValidationMessage>Please enter a name for the trip</FormValidationMessage> : null}
 
         <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}}>Image URL</FormLabel>
-        <FormInput onChangeText={this.updateUrl}containerStyle={{width: 350}}/>
+        <FormInput onChangeText={this.updateUrl} containerStyle={{width: 350}}/>
         {this.state.urlErr ? <FormValidationMessage>Please enter a URL for a picture for the trip</FormValidationMessage> : null}
         <Text>{'\n\n\n'}</Text>
+        
         {
           this.state.imageError
             ? <Text style={{textAlign: 'center'}}>Could not load the image {'\n\n'} Please try another</Text>
-            : <View style={styles.box}>
+            : <View style={this.state.load ? styles.box : null}>
                 <Image source={{uri: this.state.image_url}} onError={this.imgErr} onLoad={this.imgErrClear} style={styles.image}/>
               </View>
         }
@@ -123,6 +129,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  load: {
+    width: 100,
+    height: 100,
   },
   image: {
     width: 100,

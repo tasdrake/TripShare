@@ -2,11 +2,15 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import colors from '../css/colors';
+import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
 const {height, width} = Dimensions.get('window');
 
 export default class Trips extends React.Component {
   static navigationOptions = {
     //  header: null,
+     headerStyle:{ position: 'absolute', backgroundColor: 'transparent',  top: 0, left: 0, right: 0, borderBottomWidth: 0,},
+
+
    }
 
   constructor(props) {
@@ -58,7 +62,7 @@ export default class Trips extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       // style={{backgroundColor: colors.lightblue}}
-      <View >
+      <View style={{paddingTop: 60}}>
         <Image source={require('../css/road.jpg')} style={styles.backgroundimage}></Image>
 
 
@@ -66,19 +70,18 @@ export default class Trips extends React.Component {
             this.state.admin[0].name
               ? <View style={styles.topContainer}>
                   <TouchableOpacity onPress={() => navigate('NewTrip', { updateTrip: this.updateTrip, admin_id: this.state.admin[0].id })}>
-                    <Text style={styles.newTrip}>Create a New Trip</Text>
+                    <Text style={styles.newTrip}>New Trip</Text>
                   </TouchableOpacity>
-                  <SearchBar
+                  <FormInput placeholder='Search for trips' onChangeText={this.search} containerStyle={{width: 250, marginTop: 10}}/>
+                  {/* <SearchBar
                     round
                     lightTheme
                     onChangeText={this.search}
-                    placeholder='Search for a Specific Trip' />
+                    placeholder='Search for a Specific Trip' /> */}
                 </View>
-              : <SearchBar
-                round
-                lightTheme
-                onChangeText={this.search}
-                placeholder='Search for a Specific Trip' />
+              : <View>
+                  <FormInput placeholder='Search for trips' onChangeText={this.search}/>
+                </View>
           }
         {/* <SearchBar
           round
@@ -132,10 +135,12 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     padding: 12,
     borderRadius: 10,
-    width: 150,
+    width: 85,
     overflow: 'hidden',
     backgroundColor: 'transparent',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginLeft: 10,
+    marginTop: 10
   },
   box: {
     shadowOpacity: 0.7,
@@ -152,6 +157,8 @@ const styles = StyleSheet.create({
     // borderRadius: 32,
   },
   topContainer: {
-    flexWrap: 'nowrap'
+    flexWrap: 'nowrap',
+    flexDirection: 'row',
+
   }
 });
