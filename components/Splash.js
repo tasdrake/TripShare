@@ -89,13 +89,17 @@ class Splash extends React.Component {
             <Text style={styles.title} shadowOffset={{width: 10, height: 10}} shadowColor='black'>login to create a trip or continue to all see active trips</Text>
           </View>
 
-          <View style={styles.buttons}>
-            <Icon.Button name="facebook" backgroundColor="#3b5998" onPress={this.loginWithFacebook} {...iconStyles}>
-              Facebook login
-            </Icon.Button>
-            <TouchableOpacity onPress={() => navigate('Trips', {admin})} title='Go to trips' style={styles.tripButton}>
-              <Text style={styles.buttonText}>Go to trips</Text>
-            </TouchableOpacity>
+          <View style={styles.buttons} shadowOffset={{width: 10, height: 10}}>
+            <View>
+              <Icon.Button name="facebook" backgroundColor="#3b5998" onPress={this.loginWithFacebook} {...iconStyles} shadowOffset={{width: 10, height: 10}}>
+                Facebook login
+              </Icon.Button>
+              <View shadowOpacity={ 0.7 } style={{ height: 46, width: 148, borderRadius: 10, shadowOffset: {width: 1, height: 1}, marginTop: -46, zIndex: -1, backgroundColor: 'transparent'}}></View>
+            </View>
+
+              <TouchableOpacity onPress={() => navigate('Trips', {admin})} style={styles.tripButton}>
+                <Text style={styles.buttonText}>Go to trips</Text>
+              </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -107,7 +111,9 @@ const iconStyles = {
   iconStyle: {
     paddingVertical: 5
   },
-  width: 150
+  width: 150,
+  shadowOpacity: 0.7,
+  shadowOffset: {width: 1, height: 1}
 };
 
 const styles = StyleSheet.create({
@@ -155,7 +161,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,0.8)',
     padding: 10,
     borderRadius: 10,
-    overflow: 'hidden',
+    // overflow: 'hidden',
 
   },
   tripButton: {
@@ -165,8 +171,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#e4ad5a',
     padding: 12,
     borderRadius: 10,
-    width: 150,
-    overflow: 'hidden',
+    // width: 150,
+    // overflow: 'hidden',
+    shadowOpacity: 0.7,
+    shadowOffset: {width: 1, height: 1}
 
   },
   buttonText: {

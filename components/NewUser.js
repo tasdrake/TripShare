@@ -145,9 +145,10 @@ export default class NewUser extends React.Component {
             </View>
         }
 
-        <TouchableOpacity onPress={this.post} >
+        <TouchableOpacity onPress={this.post} style={styles.shadow} >
           <Text style={styles.newButton}>Add {this.state.name} to {this.state.trip_name}</Text>
         </TouchableOpacity>
+        {/* <View shadowOpacity={ 0.7 } style={{ height: 45, width: 160, borderRadius: 10, margin: 10, shadowOffset: {width: 1, height: 1}, marginTop: -45, zIndex: -1}}></View> */}
       </View>
     );
   }
@@ -169,19 +170,21 @@ const styles = StyleSheet.create({
     fontSize: 80,
   },
   newButton: {
-    marginTop: 50,
+    // marginTop: 50,
     textAlign: 'center',
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: '#e4ad5a',
     backgroundColor: '#e4ad5a',
-    padding: 12,
+    // padding: 12,
     borderRadius: 10,
     overflow: 'hidden',
     justifyContent: 'center',
     fontSize: 16,
     color: '#2a0001',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    shadowOpacity: 0.7,
+    shadowOffset: {width: 1, height: 1},
   },
   box: {
     shadowOpacity: 0.7,
@@ -196,5 +199,18 @@ const styles = StyleSheet.create({
     // opacity: 0.3
     // left: (Dimensions.get('window').width - 64) / 2,
     // borderRadius: 32,
+  },
+  shadow: {
+    marginTop: 50,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#e4ad5a',
+    backgroundColor: '#e4ad5a',
+    padding: 12,
+    borderRadius: 10,
+    // width: 150,
+    // overflow: 'hidden',
+    shadowOpacity: 0.7,
+    shadowOffset: {width: 1, height: 1}
   },
 });

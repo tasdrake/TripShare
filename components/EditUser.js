@@ -83,7 +83,7 @@ export default class NewUser extends React.Component {
     .then(user => {
       let phone = user[0].phone;
       phone = '(' + phone.slice(0, 3) + ')' + phone.slice(3, 6) + '-' + phone.slice(6, 10);
-      
+
       this.setState({
         name: user[0].name,
         image_url: user[0].image_url,
@@ -153,7 +153,7 @@ export default class NewUser extends React.Component {
 
         <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}} labelStyle={{color: '#ffd391', backgroundColor: 'transparent'}}>Name</FormLabel>
         <FormInput onChangeText={this.updateName} value={this.state.name} containerStyle={{width: 350, borderBottomColor: '#ffd391'}} placeholderTextColor='#ffd391' inputStyle={{color: '#ffd391'}} />
-        {this.state.nameErr ? <FormValidationMessage  labelStyle={{color: '#f46319', backgroundColor: 'transparent'}}>Please enter a name</FormValidationMessage> : null}
+        {this.state.nameErr ? <FormValidationMessage labelStyle={{color: '#f46319', backgroundColor: 'transparent'}}>Please enter a name</FormValidationMessage> : null}
 
         <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}} labelStyle={{color: '#ffd391', backgroundColor: 'transparent'}}>Image URL</FormLabel>
         <FormInput onChangeText={this.updateUrl} value={this.state.image_url} containerStyle={{width: 350, borderBottomColor: '#ffd391'}} placeholderTextColor='#ffd391' inputStyle={{color: '#ffd391'}} />
@@ -172,9 +172,10 @@ export default class NewUser extends React.Component {
         }
 
 
-        <TouchableOpacity onPress={this.post}>
+        <TouchableOpacity onPress={this.post} style={styles.shadow}>
           <Text style={styles.newButton}>Edit {this.state.name}</Text>
         </TouchableOpacity>
+
       </View>
     );
   }
@@ -196,19 +197,21 @@ const styles = StyleSheet.create({
     fontSize: 80,
   },
   newButton: {
-    marginTop: 50,
+    // marginTop: 50,
     textAlign: 'center',
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: '#e4ad5a',
     backgroundColor: '#e4ad5a',
-    padding: 12,
+    // padding: 12,
     borderRadius: 10,
     overflow: 'hidden',
     justifyContent: 'center',
     fontSize: 16,
     color: '#2a0001',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    shadowOpacity: 0.7,
+    shadowOffset: {width: 1, height: 1},
   },
   box: {
     shadowOpacity: 0.7,
@@ -223,5 +226,18 @@ const styles = StyleSheet.create({
     // opacity: 0.3
     // left: (Dimensions.get('window').width - 64) / 2,
     // borderRadius: 32,
+  },
+  shadow: {
+    marginTop: 50,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#e4ad5a',
+    backgroundColor: '#e4ad5a',
+    padding: 12,
+    borderRadius: 10,
+    // width: 150,
+    // overflow: 'hidden',
+    shadowOpacity: 0.7,
+    shadowOffset: {width: 1, height: 1}
   },
 });

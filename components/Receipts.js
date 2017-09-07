@@ -93,33 +93,42 @@ export default class Receipts extends React.Component {
                 user_id: this.state.user_id,
                 updateUsers: this.state.updateUsers,
                 updateUser: this.updateUser
-              })}>
+              })} style={styles.shadow2}>
                 <Text style={styles.editButton}>Edit User</Text>
               </TouchableOpacity>
-              <View style={{
-                flex: 1,
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}>
-                <TouchableOpacity onPress={() => navigate('Picture', { camera: this.camera })}>
-                  <Text style={styles.button}>Take a picture of the receipt</Text>
-                </TouchableOpacity>
-                {
-                  image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }}/>
-                }
-              </View>
+              {/* <View shadowOpacity={ 0.7 } style={{ height: 20, width: 66, borderRadius: 10, shadowOffset: {width: 1, height: 1}, marginTop: -20, zIndex: 0, marginBottom: 5, backgroundColor: 'transparent'}}></View> */}
+
               <View style={styles.form}>
                 <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}} labelStyle={{color: '#ffd391', backgroundColor: 'transparent'}}>Amount Spent</FormLabel>
                 <FormInput keyboardType='numeric' onChangeText={this.update} value={this.state.newAmount} containerStyle={{width: 350, borderBottomColor: '#ffd391'}} placeholderTextColor='#ffd391' inputStyle={{color: '#ffd391'}} />
                 {
                   this.state.err
-                    ? <FormValidationMessage labelStyle={{color: '#f46319', backgroundColor: 'transparent'}}>Please enter a positive number</FormValidationMessage>
-                    : null
+                  ? <FormValidationMessage labelStyle={{color: '#f46319', backgroundColor: 'transparent'}}>Please enter a positive number</FormValidationMessage>
+                  : null
                 }
               </View>
-              <TouchableOpacity onPress={this.post}>
+              {/* <Text>{'\n\n\n'}</Text> */}
+
+
+              <View style={{
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 1
+              }}>
+                <TouchableOpacity onPress={() => navigate('Picture', { camera: this.camera })} style={styles.shadow1}>
+                  <Text style={styles.button}>Take a picture of the receipt</Text>
+                </TouchableOpacity>
+                {/* {
+                  image && <Image source={{ uri: image }} style={{ width: 230, height: 200 }}/>
+                } */}
+              </View>
+              {/* <View shadowOpacity={ 0.7 } style={{ height: 45, width: 242, borderRadius: 10, shadowOffset: {width: 1, height: 1}, marginTop: -153, zIndex: 0, marginBottom: 5, backgroundColor: 'transparent'}}></View> */}
+              <Text>{'\n\n\n'}</Text>
+              <TouchableOpacity onPress={this.post} style={styles.shadow3}>
                 <Text style={styles.addButton}>Add New Receipt</Text>
               </TouchableOpacity>
+              {/* <View shadowOpacity={ 0.7 } style={{ height: 44, width: 158, borderRadius: 10, shadowOffset: {width: 1, height: 1}, marginTop: -49, zIndex: 0, marginBottom: 10, backgroundColor: 'transparent'}}></View> */}
       </View>
     );
   }
@@ -149,7 +158,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   form: {
-    marginVertical: 30,
+    marginTop: 30,
+    marginBottom: 40,
     paddingHorizontal: 15,
   },
   box: {
@@ -167,22 +177,35 @@ const styles = StyleSheet.create({
     // borderRadius: 32,
   },
   button: {
-    marginTop: 50,
+    // marginTop: -50,
     textAlign: 'center',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#e4ad5a',
+    backgroundColor: '#e4ad5a',
+    // padding: 12,
+    borderRadius: 10,
+    overflow: 'hidden',
+    justifyContent: 'center',
+    fontSize: 16,
+    color: '#2a0001',
+    fontWeight: 'bold',
+    shadowOpacity: 0.7,
+    shadowOffset: {width: 1, height: 1},
+  },
+  shadow1: {
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: '#e4ad5a',
     backgroundColor: '#e4ad5a',
     padding: 12,
     borderRadius: 10,
-    overflow: 'hidden',
-    justifyContent: 'center',
-    fontSize: 16,
-    color: '#2a0001',
-    fontWeight: 'bold'
+    shadowOpacity: 0.7,
+    shadowOffset: {width: 1, height: 1},
+    // marginTop: 70,
   },
   editButton: {
-    marginTop: 10,
+    // marginTop: 10,
     textAlign: 'center',
     borderStyle: 'solid',
     borderWidth: 1,
@@ -195,21 +218,48 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     fontSize: 12,
     color: '#2a0001',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    shadowOpacity: 0.7,
+    shadowOffset: {width: 1, height: 1},
+  },
+  shadow2: {
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#e4ad5a',
+    backgroundColor: '#e4ad5a',
+    // padding: 12,
+    borderRadius: 10,
+    shadowOpacity: 0.7,
+    shadowOffset: {width: 1, height: 1},
+    marginTop: 10,
   },
   addButton: {
-    marginTop: 20,
+    // marginTop: 20,
     textAlign: 'center',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#e4ad5a',
+    backgroundColor: '#e4ad5a',
+    // padding: 12,
+    borderRadius: 10,
+    overflow: 'hidden',
+    justifyContent: 'center',
+    fontSize: 16,
+    color: '#2a0001',
+    fontWeight: 'bold',
+    shadowOpacity: 0.7,
+    shadowOffset: {width: 1, height: 1},
+    // marginBottom: 5,
+  },
+  shadow3: {
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: '#e4ad5a',
     backgroundColor: '#e4ad5a',
     padding: 12,
     borderRadius: 10,
-    overflow: 'hidden',
-    justifyContent: 'center',
-    fontSize: 16,
-    color: '#2a0001',
-    fontWeight: 'bold'
-  }
+    shadowOpacity: 0.7,
+    shadowOffset: {width: 1, height: 1},
+    marginBottom: 110,
+  },
 });

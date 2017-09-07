@@ -70,8 +70,9 @@ export default class Trips extends React.Component {
           {
             this.state.admin[0].name
               ? <View style={styles.topContainer}>
-                  <TouchableOpacity onPress={() => navigate('NewTrip', { updateTrip: this.updateTrip, admin_id: this.state.admin[0].id })}>
+                  <TouchableOpacity onPress={() => navigate('NewTrip', { updateTrip: this.updateTrip, admin_id: this.state.admin[0].id })} style={styles.shadow}>
                     <Text style={styles.newTrip}>New Trip</Text>
+                    {/* <View shadowOpacity={ 0.7 } style={{ height: 45, width: 100, borderRadius: 10, shadowOffset: {width: 1, height: 1}, marginTop: -45, zIndex: -1, marginLeft: 10, backgroundColor: 'transparent'}}></View> */}
                   </TouchableOpacity>
                   <FormInput placeholder='Search for trips' placeholderTextColor='#ffd391' onChangeText={this.search} containerStyle={styles.search, {width: 230, borderBottomColor: '#ffd391'}} inputStyle={{color: '#ffd391', marginTop: 15}} />
                   {/* <SearchBar
@@ -135,16 +136,18 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#e4ad5a',
     backgroundColor: '#e4ad5a',
-    padding: 12,
+    // padding: 12,
     borderRadius: 10,
-    width: 100,
+    // width: 100,
     overflow: 'hidden',
     justifyContent: 'center',
-    marginLeft: 10,
-    marginTop: 10,
+    // marginLeft: 10,
+    // marginTop: 10,
     fontSize: 16,
     color: '#2a0001',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    shadowOpacity: 0.7,
+    shadowOffset: {width: 1, height: 1},
   },
   box: {
     shadowOpacity: 0.7,
@@ -167,5 +170,20 @@ const styles = StyleSheet.create({
   },
   search: {
     borderBottomColor: '#ffd391',
+    width: 340,
+  },
+  shadow: {
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#e4ad5a',
+    backgroundColor: '#e4ad5a',
+    padding: 12,
+    borderRadius: 10,
+    // width: 150,
+    // overflow: 'hidden',
+    shadowOpacity: 0.7,
+    shadowOffset: {width: 1, height: 1},
+    marginLeft: 10,
+    marginTop: 10,
   }
 });
