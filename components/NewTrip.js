@@ -65,8 +65,8 @@ export default class NewTrip extends React.Component {
   updateUrl = (e) => {
     this.setState({ imageError: false, load: false });
     if (!e) {
-      this.setState({ urlErr: true });
-      this.setState({ image_url: e });
+      // this.setState({ urlErr: true });
+      this.setState({ image_url: 'https://cdn.pixabay.com/photo/2016/07/30/00/03/mountain-road-1556177_1280.jpg' });
 
     } else {
       this.setState({ urlErr: false });
@@ -75,12 +75,9 @@ export default class NewTrip extends React.Component {
   }
 
   imgErr = () => {
-    console.log('err1');
-    console.log(this.state.image_url.length > 1);
-    if (!this.state.load && this.state.image_url.length > 1) {
+    // if (!this.state.load && this.state.image_url.length > 1) {
       this.setState({ imageError: true });
-      console.log('err2');
-    }
+    // }
   }
 
   imgErrClear = () => {
@@ -102,7 +99,7 @@ export default class NewTrip extends React.Component {
 
         {
           this.state.imageError
-            ? <Text style={{textAlign: 'center'}}>Could not load the image {'\n\n'} Please try another</Text>
+            ? <Text style={{textAlign: 'center', backgroundColor: 'transparent', color: '#f46319'}}>Could not load the image {'\n\n'} Please try another</Text>
             : <View style={this.state.load ? styles.box : null}>
                 <Image source={{uri: this.state.image_url}} onError={this.imgErr} onLoad={this.imgErrClear} style={styles.image}/>
               </View>

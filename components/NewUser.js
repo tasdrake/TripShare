@@ -79,8 +79,8 @@ export default class NewUser extends React.Component {
   updateUrl = (e) => {
     this.setState({ imageError: false, load: false });
     if (!e) {
-      this.setState({ urlErr: true });
-      this.setState({ image_url: e });
+      // this.setState({ urlErr: true });
+      this.setState({ image_url: 'https://cdn.pixabay.com/photo/2017/02/25/22/04/user-icon-2098873_1280.png' });
     } else {
       this.setState({ urlErr: false });
       this.setState({ image_url: e });
@@ -111,9 +111,7 @@ export default class NewUser extends React.Component {
   }
 
   imgErr = () => {
-    window.setTimeout(() => {
-      if (!this.state.load) this.setState({ imageError: true });
-    }, 1500);
+    if (!this.state.load) this.setState({ imageError: true });
   }
 
   imgErrClear = () => {
@@ -139,7 +137,7 @@ export default class NewUser extends React.Component {
         <Text>{'\n\n\n'}</Text>
         {
           this.state.imageError
-            ? <Text style={{textAlign: 'center'}}>Could not load the image {'\n\n'} Please try another</Text>
+            ? <Text style={{textAlign: 'center', backgroundColor: 'transparent', color: '#f46319'}}>Could not load the image {'\n\n'} Please try another</Text>
             : <View style={styles.box}>
               <Image source={{uri: this.state.image_url}} onError={this.imgErr} onLoad={this.imgErrClear} style={styles.image}/>
             </View>
