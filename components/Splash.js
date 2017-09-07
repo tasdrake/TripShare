@@ -91,9 +91,11 @@ class Splash extends React.Component {
 
           <View style={styles.buttons} shadowOffset={{width: 10, height: 10}}>
             <View>
-              <Icon.Button name="facebook" backgroundColor="#3b5998" onPress={this.loginWithFacebook} {...iconStyles} shadowOffset={{width: 10, height: 10}}>
-                Facebook login
-              </Icon.Button>
+              <TouchableOpacity style={styles.shadow}>
+                <Icon.Button name="facebook" backgroundColor="#3b5998" onPress={this.loginWithFacebook} {...iconStyles} shadowOffset={{width: 10, height: 10}}>
+                  Facebook login
+                </Icon.Button>
+              </TouchableOpacity>
               <View shadowOpacity={ 0.7 } style={{ height: 46, width: 148, borderRadius: 10, shadowOffset: {width: 1, height: 1}, marginTop: -46, zIndex: -1, backgroundColor: 'transparent'}}></View>
             </View>
 
@@ -171,7 +173,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#e4ad5a',
     padding: 12,
     borderRadius: 10,
-    // width: 150,
+    width: 150,
     // overflow: 'hidden',
     shadowOpacity: 0.7,
     shadowOffset: {width: 1, height: 1}
@@ -198,6 +200,14 @@ color: '#2a0001',
     borderRadius: 100/2,
     backgroundColor: 'red'
   },
+  shadow: {
+    borderRadius: 10,
+    // width: 150,
+    // overflow: 'hidden',
+    shadowOpacity: 0.7,
+    shadowOffset: {width: 1, height: 1},
+    width: 150,
+  }
 
 });
 
