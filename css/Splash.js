@@ -57,5 +57,12 @@ module.exports = {
     },
     width: 350,
     marginVertical: 50
+  },
+  icon: {
+    borderRadius: 10,
+    iconStyle: {
+      paddingVertical: 5
+    },
+    width: 350
   }
 };

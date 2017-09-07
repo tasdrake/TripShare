@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import {
   FormLabel,
-  FormInput, 
+  FormInput,
   FormValidationMessage
 } from 'react-native-elements';
 import colors from '../css/colors';
@@ -93,7 +93,7 @@ export default class NewTrip extends React.Component {
   render() {
     return (
       <View style={styles.user}>
-        <Image source={require('../css/background2.png')} style={styles.backgroundimage}></Image>
+        <Image source={require('../css/background2.png')} style={styles.backgroundimage}/>
 
         <FormLabel containerStyle={forms.labelContainer} labelStyle={forms.labelStyle}>
           Trip Name

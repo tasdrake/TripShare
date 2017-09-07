@@ -90,11 +90,11 @@ export default class Receipts extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    
+
     return (
       <View style={styles.user}>
 
-        <Image source={require('../css/background2.png')} style={styles.backgroundimage}></Image>
+        <Image source={require('../css/background2.png')} style={styles.backgroundimage}/>
 
         <Text style={styles.name}>
           {this.state.user.name}

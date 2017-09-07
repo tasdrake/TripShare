@@ -76,7 +76,11 @@ export default class TripUsers extends React.Component {
         {
           this.state.admin[0].id === this.state.admin_id
           ? <View style={styles.topContainer}>
-              <TouchableOpacity onPress={() => navigate('NewUser', { trip_name: this.state.name, trip_id: this.state.trip_id, updateUsers: this.updateUsers })} style={styles.shadow}>
+              <TouchableOpacity onPress={() => navigate('NewUser', {
+                trip_name: this.state.name,
+                trip_id: this.state.trip_id,
+                updateUsers: this.updateUsers 
+              })} style={styles.shadow}>
                 <Text style={styles.newUser}>New Person</Text>
               </TouchableOpacity>
               <FormInput placeholder='Search for trips'

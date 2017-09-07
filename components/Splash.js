@@ -70,11 +70,11 @@ export default class Splash extends React.Component {
     return (
       <View style={styles.container}>
 
-        <Image source={require('../css/background2.png')} style={styles.image}></Image>
+        <Image source={require('../css/background2.png')} style={styles.image}/>
 
         <View>
           <TouchableOpacity style={styles.shadow}>
-            <Icon.Button name="facebook" backgroundColor="transparent" onPress={this.loginWithFacebook} {...iconStyles}>
+            <Icon.Button name="facebook" backgroundColor="transparent" onPress={this.loginWithFacebook} {...styles.icon}>
               Login with Facebook to Create or Edit Trips
             </Icon.Button>
           </TouchableOpacity>
@@ -87,12 +87,3 @@ export default class Splash extends React.Component {
     );
   }
 }
-
-
-const iconStyles = {
-  borderRadius: 10,
-  iconStyle: {
-    paddingVertical: 5
-  },
-  width: 350
-};

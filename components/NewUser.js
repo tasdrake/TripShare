@@ -130,7 +130,7 @@ export default class NewUser extends React.Component {
   render() {
     return (
       <View style={styles.user}>
-        <Image source={require('../css/background2.png')} style={styles.backgroundimage}></Image>
+        <Image source={require('../css/background2.png')} style={styles.backgroundimage}/>
 
         <FormLabel containerStyle={forms.labelContainer} labelStyle={forms.labelStyle}>
           Name

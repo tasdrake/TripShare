@@ -162,7 +162,7 @@ export default class NewUser extends React.Component {
   render() {
     return (
       <View style={styles.user}>
-        <Image source={require('../css/background2.png')} style={styles.backgroundimage}></Image>
+        <Image source={require('../css/background2.png')} style={styles.backgroundimage}/>
 
         <FormLabel containerStyle={forms.labelContainer} labelStyle={forms.labelStyle}>
           Name
@@ -244,64 +244,3 @@ export default class NewUser extends React.Component {
     );
   }
 }
-
-// const styles = StyleSheet.create({
-//   user: {
-//     flex: 1,
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-//   image: {
-//     width: 100,
-//     height: 100,
-//     borderRadius: 50,
-//     overflow: 'hidden'
-//   },
-//   name: {
-//     fontSize: 80,
-//   },
-//   newButton: {
-//     // marginTop: 50,
-//     textAlign: 'center',
-//     borderStyle: 'solid',
-//     borderWidth: 1,
-//     borderColor: '#e4ad5a',
-//     backgroundColor: '#e4ad5a',
-//     // padding: 12,
-//     borderRadius: 10,
-//     overflow: 'hidden',
-//     justifyContent: 'center',
-//     fontSize: 16,
-//     color: '#2a0001',
-//     fontWeight: 'bold',
-//     shadowOpacity: 0.7,
-//     shadowOffset: {width: 1, height: 1},
-//   },
-//   box: {
-//     shadowOpacity: 0.7,
-//     shadowOffset: {width: 1, height: 1},
-//     borderRadius: 50,
-//     // overflow: 'hidden'
-//   },
-//   backgroundimage: {
-//     position: 'absolute',
-//     height,
-//     width,
-//     // opacity: 0.3
-//     // left: (Dimensions.get('window').width - 64) / 2,
-//     // borderRadius: 32,
-//   },
-//   shadow: {
-//     marginTop: 50,
-//     borderStyle: 'solid',
-//     borderWidth: 1,
-//     borderColor: '#e4ad5a',
-//     backgroundColor: '#e4ad5a',
-//     padding: 12,
-//     borderRadius: 10,
-//     // width: 150,
-//     // overflow: 'hidden',
-//     shadowOpacity: 0.7,
-//     shadowOffset: {width: 1, height: 1}
-//   },
-// });
