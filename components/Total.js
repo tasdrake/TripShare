@@ -102,7 +102,7 @@ export default class Total extends React.Component {
     })
     .then(() => {
       const { navigate } = this.props.navigation;
-      navigate('Trips', {admin: this.state.admin});
+      navigate('Trips', {admin: this.state.admin[0]});
     });
   }
 
@@ -130,7 +130,7 @@ export default class Total extends React.Component {
 
         <View style={{alignItems: 'center', marginBottom: 10, flexDirection: 'row', justifyContent: 'space-around'}}>
           <View style={styles.shadow}>
-            <TouchableOpacity onPress={() => navigate('Trips', {admin: this.state.admin})}>
+            <TouchableOpacity onPress={() => navigate('Trips', {admin: this.state.admin[0]})}>
               <Text style={styles.footer}>Search Other Trips</Text>
             </TouchableOpacity>
           </View>

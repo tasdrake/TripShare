@@ -32,17 +32,17 @@ export default class NewUser extends React.Component {
     phone = phone.split(/[)(-]/g).join('');
     if (phone.length !== 10) {
       this.setState({ phoneErr: true });
-    } else if (!this.state.name && !this.state.image_url && !this.state.phone) {
-      this.setState({ nameErr: true, urlErr: true, phoneErr: true });
-    } else if (!this.state.name && !this.state.image_url) {
-      this.setState({ nameErr: true, urlErr: true });
+    // } else if (!this.state.name && !this.state.image_url && !this.state.phone) {
+    //   this.setState({ nameErr: true, urlErr: true, phoneErr: true });
+    // } else if (!this.state.name && !this.state.image_url) {
+    //   this.setState({ nameErr: true, urlErr: true });
     } else if (!this.state.name && !this.state.phone) {
       this.setState({ nameErr: true, phoneErr: true });
-    } else if (!this.state.phone && !this.state.image_url) {
-      this.setState({ phoneErr: true, urlErr: true });
+    // } else if (!this.state.phone && !this.state.image_url) {
+    //   this.setState({ phoneErr: true, urlErr: true });
     } else if (!this.state.name) {
       this.setState({ nameErr: true });
-    } else if (!this.state.image_url || !this.state.load) {
+    } else if (!this.state.load) {
       this.setState({ urlErr: true });
     } else {
       fetch(`https://split-trip.herokuapp.com/users/`, {

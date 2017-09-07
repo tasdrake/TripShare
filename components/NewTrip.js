@@ -14,22 +14,23 @@ export default class NewTrip extends React.Component {
     super(props);
     this.state = {
       name: '',
-      image_url: ' ',
+      image_url: 'https://cdn.pixabay.com/photo/2016/07/30/00/03/mountain-road-1556177_1280.jpg',
       nameErr: false,
       urlErr: false,
       updateTrip: this.props.navigation.state.params.updateTrip,
       imageError: false,
-      load: false,
+      load: true,
       admin_id: this.props.navigation.state.params.admin_id,
     };
   }
 
   post = () => {
-    if (!this.state.name && !this.state.image_url) {
-      this.setState({ nameErr: true, urlErr: true });
-    } else if (!this.state.name) {
+    // if (!this.state.name && !this.state.image_url) {
+    //   this.setState({ nameErr: true, urlErr: true });
+    // } else
+    if (!this.state.name) {
       this.setState({ nameErr: true });
-    } else if (!this.state.image_url || !this.state.load) {
+    } else if (!this.state.load) {
       this.setState({ urlErr: true });
     } else {
       fetch(`https://split-trip.herokuapp.com/trips/`, {
