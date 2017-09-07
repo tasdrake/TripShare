@@ -76,7 +76,7 @@ export default class Trips extends React.Component {
                     <Text style={styles.newTrip}>New Trip</Text>
                     {/* <View shadowOpacity={ 0.7 } style={{ height: 45, width: 100, borderRadius: 10, shadowOffset: {width: 1, height: 1}, marginTop: -45, zIndex: -1, marginLeft: 10, backgroundColor: 'transparent'}}></View> */}
                   </TouchableOpacity>
-                  <FormInput placeholder='Search for trips' placeholderTextColor='#ffd391' onChangeText={this.search} containerStyle={styles.search, {width: 230, borderBottomColor: '#ffd391'}} inputStyle={{color: '#ffd391', marginTop: 15}} />
+                  <FormInput placeholder='Search for trips' placeholderTextColor='#ffd391' onChangeText={this.search} containerStyle={styles.search, {width: 230, borderBottomColor: '#ffd391'}} inputStyle={{color: '#ffd391', marginTop: 15}} selectionColor={'#ffd391'}/>
                   {/* <SearchBar
                     round
                     lightTheme

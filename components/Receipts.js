@@ -116,18 +116,23 @@ export default class Receipts extends React.Component {
                 justifyContent: 'center',
                 zIndex: 1
               }}>
-                <TouchableOpacity onPress={() => navigate('Picture', { camera: this.camera })} style={styles.shadow1}>
-                  <Text style={styles.button}>Take a picture of the receipt</Text>
-                </TouchableOpacity>
+
                 {/* {
                   image && <Image source={{ uri: image }} style={{ width: 230, height: 200 }}/>
                 } */}
               </View>
               {/* <View shadowOpacity={ 0.7 } style={{ height: 45, width: 242, borderRadius: 10, shadowOffset: {width: 1, height: 1}, marginTop: -153, zIndex: 0, marginBottom: 5, backgroundColor: 'transparent'}}></View> */}
-              <Text>{'\n\n\n'}</Text>
+
               <TouchableOpacity onPress={this.post} style={styles.shadow3}>
                 <Text style={styles.addButton}>Add New Receipt</Text>
               </TouchableOpacity>
+              {/* <Text>{'\n\n\n'}</Text> */}
+              <View>
+                <TouchableOpacity onPress={() => navigate('Picture', { camera: this.camera })} style={styles.shadow1}>
+                  <Text style={styles.button}>Take a picture of the receipt</Text>
+                </TouchableOpacity>
+
+              </View>
               {/* <View shadowOpacity={ 0.7 } style={{ height: 44, width: 158, borderRadius: 10, shadowOffset: {width: 1, height: 1}, marginTop: -49, zIndex: 0, marginBottom: 10, backgroundColor: 'transparent'}}></View> */}
       </View>
     );
@@ -159,7 +164,7 @@ const styles = StyleSheet.create({
   },
   form: {
     marginTop: 30,
-    marginBottom: 40,
+    marginBottom: 5,
     paddingHorizontal: 15,
   },
   box: {
@@ -177,7 +182,7 @@ const styles = StyleSheet.create({
     // borderRadius: 32,
   },
   button: {
-    // marginTop: -50,
+    // marginBottom: 50,
     textAlign: 'center',
     borderStyle: 'solid',
     borderWidth: 1,
@@ -194,6 +199,8 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 1, height: 1},
   },
   shadow1: {
+    marginBottom: 100,
+
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: '#e4ad5a',
@@ -260,6 +267,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     shadowOpacity: 0.7,
     shadowOffset: {width: 1, height: 1},
-    marginBottom: 110,
+    marginBottom: 60,
   },
 });

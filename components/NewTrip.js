@@ -65,8 +65,8 @@ export default class NewTrip extends React.Component {
   updateUrl = (e) => {
     this.setState({ imageError: false, load: false });
     if (!e) {
-      this.setState({ urlErr: true });
-      this.setState({ image_url: e });
+      // this.setState({ urlErr: true });
+      this.setState({ image_url: 'https://cdn.pixabay.com/photo/2016/07/30/00/03/mountain-road-1556177_1280.jpg' });
 
     } else {
       this.setState({ urlErr: false });
@@ -75,12 +75,9 @@ export default class NewTrip extends React.Component {
   }
 
   imgErr = () => {
-    console.log('err1');
-    console.log(this.state.image_url.length > 1);
-    if (!this.state.load && this.state.image_url.length > 1) {
+    // if (!this.state.load && this.state.image_url.length > 1) {
       this.setState({ imageError: true });
-      console.log('err2');
-    }
+    // }
   }
 
   imgErrClear = () => {
@@ -92,17 +89,17 @@ export default class NewTrip extends React.Component {
       <View style={styles.user}>
         <Image source={require('../css/background2.png')} style={styles.backgroundimage}></Image>
         <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}} labelStyle={{color: '#ffd391', backgroundColor: 'transparent'}}>Trip Name</FormLabel>
-        <FormInput onChangeText={this.updateName} containerStyle={{width: 350, borderBottomColor: '#ffd391'}} placeholderTextColor='#ffd391' inputStyle={{color: '#ffd391'}} />
+        <FormInput onChangeText={this.updateName} containerStyle={{width: 350, borderBottomColor: '#ffd391'}} placeholderTextColor='#ffd391' inputStyle={{color: '#ffd391'}} selectionColor={'#ffd391'} />
         {this.state.nameErr ? <FormValidationMessage labelStyle={{color: '#f46319', backgroundColor: 'transparent'}}>Please enter a name for the trip</FormValidationMessage> : null}
 
         <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}} labelStyle={{color: '#ffd391', backgroundColor: 'transparent'}}>Image URL</FormLabel>
-        <FormInput onChangeText={this.updateUrl} containerStyle={{width: 350, borderBottomColor: '#ffd391'}} placeholderTextColor='#ffd391' inputStyle={{color: '#ffd391'}} />
+        <FormInput onChangeText={this.updateUrl} containerStyle={{width: 350, borderBottomColor: '#ffd391'}} placeholderTextColor='#ffd391' inputStyle={{color: '#ffd391'}} selectionColor={'#ffd391'} />
         {this.state.urlErr ? <FormValidationMessage labelStyle={{color: '#f46319', backgroundColor: 'transparent'}}>Please enter a URL for a picture for the trip</FormValidationMessage> : null}
         <Text>{'\n\n\n'}</Text>
 
         {
           this.state.imageError
-            ? <Text style={{textAlign: 'center'}}>Could not load the image {'\n\n'} Please try another</Text>
+            ? <Text style={{textAlign: 'center', backgroundColor: 'transparent', color: '#f46319'}}>Could not load the image {'\n\n'} Please try another</Text>
             : <View style={this.state.load ? styles.box : null}>
                 <Image source={{uri: this.state.image_url}} onError={this.imgErr} onLoad={this.imgErrClear} style={styles.image}/>
               </View>

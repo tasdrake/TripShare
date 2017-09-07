@@ -79,8 +79,8 @@ export default class NewUser extends React.Component {
   updateUrl = (e) => {
     this.setState({ imageError: false, load: false });
     if (!e) {
-      this.setState({ urlErr: true });
-      this.setState({ image_url: e });
+      // this.setState({ urlErr: true });
+      this.setState({ image_url: 'https://cdn.pixabay.com/photo/2017/02/25/22/04/user-icon-2098873_1280.png' });
     } else {
       this.setState({ urlErr: false });
       this.setState({ image_url: e });
@@ -111,9 +111,7 @@ export default class NewUser extends React.Component {
   }
 
   imgErr = () => {
-    window.setTimeout(() => {
-      if (!this.state.load) this.setState({ imageError: true });
-    }, 1500);
+    if (!this.state.load) this.setState({ imageError: true });
   }
 
   imgErrClear = () => {
@@ -126,20 +124,20 @@ export default class NewUser extends React.Component {
         <Image source={require('../css/background2.png')} style={styles.backgroundimage}></Image>
 
         <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}} labelStyle={{color: '#ffd391', backgroundColor: 'transparent'}}>Name</FormLabel>
-        <FormInput onChangeText={this.updateName} containerStyle={{width: 350, borderBottomColor: '#ffd391'}} placeholderTextColor='#ffd391' inputStyle={{color: '#ffd391'}} />
+        <FormInput onChangeText={this.updateName} containerStyle={{width: 350, borderBottomColor: '#ffd391'}} placeholderTextColor='#ffd391' inputStyle={{color: '#ffd391'}} selectionColor={'#ffd391'} />
         {this.state.nameErr ? <FormValidationMessage labelStyle={{color: '#f46319', backgroundColor: 'transparent'}}>Please enter a name</FormValidationMessage> : null}
 
         <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}} labelStyle={{color: '#ffd391', backgroundColor: 'transparent'}}>Image URL</FormLabel>
-        <FormInput onChangeText={this.updateUrl} containerStyle={{width: 350, borderBottomColor: '#ffd391'}} placeholderTextColor='#ffd391' inputStyle={{color: '#ffd391'}} />
+        <FormInput onChangeText={this.updateUrl} containerStyle={{width: 350, borderBottomColor: '#ffd391'}} placeholderTextColor='#ffd391' inputStyle={{color: '#ffd391'}} selectionColor={'#ffd391'} />
         {this.state.urlErr ? <FormValidationMessage labelStyle={{color: '#f46319', backgroundColor: 'transparent'}}>Please enter a URL for the user icon</FormValidationMessage> : null}
 
         <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}} labelStyle={{color: '#ffd391', backgroundColor: 'transparent'}}>Phone Number</FormLabel>
-        <FormInput onChangeText={this.updatePhone} containerStyle={{width: 350, borderBottomColor: '#ffd391'}} placeholderTextColor='#ffd391' inputStyle={{color: '#ffd391'}} value={this.state.phone}/>
+        <FormInput onChangeText={this.updatePhone} containerStyle={{width: 350, borderBottomColor: '#ffd391'}} placeholderTextColor='#ffd391' inputStyle={{color: '#ffd391'}} value={this.state.phone} selectionColor={'#ffd391'} />
         {this.state.phoneErr ? <FormValidationMessage labelStyle={{color: '#f46319', backgroundColor: 'transparent'}}>Please enter a 10 digit phone number</FormValidationMessage> : null}
         <Text>{'\n\n\n'}</Text>
         {
           this.state.imageError
-            ? <Text style={{textAlign: 'center'}}>Could not load the image {'\n\n'} Please try another</Text>
+            ? <Text style={{textAlign: 'center', backgroundColor: 'transparent', color: '#f46319'}}>Could not load the image {'\n\n'} Please try another</Text>
             : <View style={styles.box}>
               <Image source={{uri: this.state.image_url}} onError={this.imgErr} onLoad={this.imgErrClear} style={styles.image}/>
             </View>
