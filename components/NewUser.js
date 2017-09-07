@@ -30,7 +30,7 @@ export default class NewUser extends React.Component {
   post = () => {
     let phone = this.state.phone;
     phone = phone.split(/[)(-]/g).join('');
-    if (this.state.phone.length !== 10) {
+    if (phone.length !== 10) {
       this.setState({ phoneErr: true });
     } else if (!this.state.name && !this.state.image_url && !this.state.phone) {
       this.setState({ nameErr: true, urlErr: true, phoneErr: true });

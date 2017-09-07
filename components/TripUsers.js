@@ -112,7 +112,7 @@ export default class TripUsers extends React.Component {
         <View style={{justifyContent: 'center', alignItems: 'center', marginBottom: 10,}}>
 
           <View style={styles.shadow2}>
-            <TouchableOpacity onPress={() => navigate('Total', { trip_id: this.state.trip_id, admin: this.state.admin, admin_id: this.state.admin_id })} >
+            <TouchableOpacity onPress={() => navigate('Total', { trip_id: this.state.trip_id, admin: this.state.admin, admin_id: this.state.admin_id, name: this.state.name })} >
               <Text style={styles.footer}>Total Trip</Text>
             </TouchableOpacity>
             {/* <View shadowOpacity={ 0.7 } style={{ height: 45, width: 200, borderRadius: 10, shadowOffset: {width: 1, height: 1}, marginTop: -45, zIndex: -1, marginBottom: 5, backgroundColor: 'transparent'}}></View> */}
