@@ -97,8 +97,9 @@ export default class Picture extends React.Component {
         aspect={Camera.constants.Aspect.fill}>
         <TouchableHighlight style={styles.capture} onPress={this.takePicture.bind(this)}>
           <Image
-            style={{width: 100, height: 100}}
-            source={{uri: 'https://s22.postimg.org/yyv1p3lzl/jbnbtn.png'}}
+            style={{width: 150, height: 150}}
+            source={require('../css/button.png')}
+            // {uri: 'https://s22.postimg.org/yyv1p3lzl/jbnbtn.png'}
            />
         </TouchableHighlight>
       </Camera>
