@@ -1,6 +1,15 @@
 import React from 'react';
-import { Text, View, Image, TouchableOpacity } from 'react-native';
-import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
+import {
+  Text,
+  View,
+  Image,
+  TouchableOpacity
+} from 'react-native';
+import {
+  FormLabel,
+  FormInput, 
+  FormValidationMessage
+} from 'react-native-elements';
 import colors from '../css/colors';
 import styles from '../css/NewTrip';
 import forms from '../css/forms';
