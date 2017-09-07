@@ -18,6 +18,7 @@ export default class Total extends React.Component {
       totals: {},
       admin: this.props.navigation.state.params.admin,
       admin_id: this.props.navigation.state.params.admin_id,
+      name: this.props.navigation.state.params.name,
     };
   }
   componentDidMount() {
@@ -77,6 +78,34 @@ export default class Total extends React.Component {
     });
   }
 
+  deleteTrip = () => {
+    if (this.state.trip_users.every(e => e.paid)) {
+      Alert.alert(
+        `Are you sure you want to end ${this.state.name}`,
+        'This will delete the trip',
+        [
+          {text: 'No', onPress: () => {} , style: 'cancel'},
+          {text: 'Yes', onPress: () => this.del()},
+        ],
+        { cancelable: false }
+      );
+    }
+  }
+
+  del = () => {
+    fetch(`https://split-trip.herokuapp.com/trips/${this.state.trip_id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+    .then(() => {
+      const { navigate } = this.props.navigation;
+      navigate('Trips', {admin: this.state.admin});
+    });
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -99,10 +128,15 @@ export default class Total extends React.Component {
         </List>
         </ScrollView>
 
-        <View style={{alignItems: 'center', marginBottom: 10}}>
+        <View style={{alignItems: 'center', marginBottom: 10, flexDirection: 'row', justifyContent: 'space-around'}}>
           <View style={styles.shadow}>
             <TouchableOpacity onPress={() => navigate('Trips', {admin: this.state.admin})}>
               <Text style={styles.footer}>Search Other Trips</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.shadow}>
+            <TouchableOpacity onPress={this.deleteTrip}>
+              <Text style={styles.footer}>End Trip</Text>
             </TouchableOpacity>
           </View>
           {/* <View shadowOpacity={ 0.7 } style={{ height: 44, width: 200, borderRadius: 10, shadowOffset: {width: 1, height: 1}, marginTop: -49, zIndex: -1, marginBottom: 12, backgroundColor: 'transparent'}}></View> */}
@@ -163,7 +197,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#e4ad5a',
     padding: 12,
     borderRadius: 10,
-    // width: 150,
+    width: 180,
     // overflow: 'hidden',
     shadowOpacity: 0.7,
     shadowOffset: {width: 1, height: 1},
