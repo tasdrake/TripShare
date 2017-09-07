@@ -60,6 +60,8 @@ export default class Trips extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
+    console.log(this.state.admin);
+    console.log(this.state.admin[0].name);
     return (
       // style={{backgroundColor: colors.lightblue}}
       <View style={{paddingTop: 60}}>
