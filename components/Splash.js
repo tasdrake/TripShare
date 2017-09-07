@@ -2,23 +2,21 @@ import React from 'react';
 import {
   Image,
   Linking,
-  StyleSheet,
   Platform,
   Text,
   View,
-  Button,
   TouchableOpacity,
-  Dimensions
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
-import colors from '../css/colors';
-// import client_id from '../key';
-import LinearGradient from 'react-native-linear-gradient';
+import styles from '../css/Splash';
 
-const {height, width} = Dimensions.get('window');
 
-class Splash extends React.Component {
+export default class Splash extends React.Component {
+  static navigationOptions = {
+    header: null
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -27,16 +25,11 @@ class Splash extends React.Component {
       }
     };
   }
-  static navigationOptions = {
-    header: null
-  }
 
   componentDidMount() {
     Linking.addEventListener('url', this.handleOpenURL);
     Linking.getInitialURL().then((url) => {
-      if (url) {
-        this.handleOpenURL({url});
-      }
+      if (url) this.handleOpenURL({url});
     });
   }
 
@@ -45,8 +38,7 @@ class Splash extends React.Component {
   }
 
   handleOpenURL = ({url}) => {
-    const [,
-      user_string] = url.match(/user=([^#]+)/);
+    const [, user_string] = url.match(/user=([^#]+)/);
     this.setState({
       admin: JSON.parse(decodeURI(user_string))
     });
@@ -72,148 +64,26 @@ class Splash extends React.Component {
   };
 
   render() {
-    const {admin} = this.state;
-    const {navigate} = this.props.navigation;
+    const { admin } = this.state;
+    const { navigate } = this.props.navigation;
 
     return (
-        <View style={styles.container}>
+      <View style={styles.container}>
 
-          {/* <Image source={require('../css/road.jpg')} style={styles.image}></Image> */}
-          <Image source={require('../css/background2.png')} style={styles.image}></Image>
-          {/* <View style={styles.container}>
-            <View style={styles.content}>
-              <Text style={styles.title}>Welcome to TripShare {'\n'}</Text>
-              <View style={styles.box}>
-              <Text>login</Text>
-            </View>
-            <Text style={styles.title} shadowOffset={{width: 10, height: 10}} shadowColor='black'>login to create a trip or continue to all see active trips</Text>
-          </View> */}
+        <Image source={require('../css/background2.png')} style={styles.image}/>
 
-          {/* <View style={styles.buttons} shadowOffset={{width: 10, height: 10}}> */}
-            <View>
-              <TouchableOpacity style={styles.shadow}>
-                <Icon.Button name="facebook" backgroundColor="transparent" onPress={this.loginWithFacebook} {...iconStyles}>
-                  Login with Facebook to Create or Edit Trips
-                </Icon.Button>
-              </TouchableOpacity>
-              {/* <View shadowOpacity={ 0.7 } style={{ height: 46, width: 148, borderRadius: 10, shadowOffset: {width: 1, height: 1}, marginTop: -46, zIndex: -1, backgroundColor: 'transparent'}}></View> */}
-            </View>
+        <View>
+          <TouchableOpacity style={styles.shadow}>
+            <Icon.Button name="facebook" backgroundColor="transparent" onPress={this.loginWithFacebook} {...styles.icon}>
+              Login with Facebook to Create or Edit Trips
+            </Icon.Button>
+          </TouchableOpacity>
+        </View>
 
-              <TouchableOpacity onPress={() => navigate('Trips', {admin})} style={styles.tripButton}>
-                <Text style={styles.buttonText}>Add Receipts and See Totals</Text>
-              </TouchableOpacity>
-          {/* </View> */}
-        {/* </View> */}
+        <TouchableOpacity onPress={() => navigate('Trips', {admin})} style={styles.tripButton}>
+          <Text style={styles.buttonText}>Add Receipts and See Totals</Text>
+        </TouchableOpacity>
       </View>
     );
   }
 }
-const iconStyles = {
-  borderRadius: 10,
-  iconStyle: {
-    paddingVertical: 5
-  },
-  width: 350,
-  shadowOpacity: 0.7,
-  shadowOffset: {width: 1, height: 1}
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // backgroundColor: colors.yellow
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'transparent',
-    flexDirection: 'column',
-
-  },
-  avatar: {
-    margin: 20
-  },
-  avatarImage: {
-    borderRadius: 50,
-    height: 100,
-    width: 100
-  },
-  header: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10
-  },
-  text: {
-    textAlign: 'center',
-    color: 'black',
-    marginBottom: 5,
-    backgroundColor: 'transparent'
-  },
-  buttons: {
-    justifyContent: 'space-around',
-    flexDirection: 'row',
-    margin: 20,
-    marginBottom: 30
-  },
-  title: {
-    fontSize: 30,
-    textAlign: 'center',
-    color: 'black',
-    backgroundColor: 'rgba(255,255,255,0.8)',
-    padding: 10,
-    borderRadius: 10,
-    // overflow: 'hidden',
-
-  },
-  tripButton: {
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderColor: '#e4ad5a',
-    backgroundColor: '#e4ad5a',
-    padding: 12,
-    borderRadius: 10,
-    width: 350,
-    // overflow: 'hidden',
-    shadowOpacity: 0.7,
-    shadowOffset: {width: 1, height: 1},
-    marginVertical: 50,
-
-  },
-  buttonText: {
-    textAlign: 'center',
-    fontSize: 16,
-color: '#2a0001',
-    backgroundColor: 'transparent',
-    fontWeight: 'bold'
-  },
-  image: {
-    position: 'absolute',
-    height,
-    width,
-    // opacity: 0.3
-    // left: (Dimensions.get('window').width - 64) / 2,
-    // borderRadius: 32,
-  },
-  box: {
-    width: 100,
-    height: 100,
-    borderRadius: 100/2,
-    backgroundColor: 'red'
-  },
-  shadow: {
-    borderRadius: 10,
-    borderColor: '#3b5998',
-    borderWidth: 1,
-    backgroundColor: '#3b5998',
-    // width: 300,
-    // overflow: 'hidden',
-    shadowOpacity: 0.7,
-    shadowOffset: {width: 1, height: 1},
-    width: 350,
-    marginVertical: 50,
-  }
-
-});
-
-export default Splash;
