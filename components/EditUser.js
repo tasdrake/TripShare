@@ -1,13 +1,29 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
-import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
-const {height, width} = Dimensions.get('window');
-
-
+import {
+  Text,
+  View,
+  Image,
+  TouchableOpacity
+} from 'react-native';
+import {
+  FormLabel,
+  FormInput,
+  FormValidationMessage
+} from 'react-native-elements';
+import colors from '../css/colors';
+import styles from '../css/EditUser';
+import forms from '../css/forms';
 
 export default class NewUser extends React.Component {
   static navigationOptions = {
-    headerStyle:{ position: 'absolute', backgroundColor: 'transparent',  top: 0, left: 0, right: 0, borderBottomWidth: 0,},
+    headerStyle: {
+      position: 'absolute',
+      backgroundColor: 'transparent',
+      top: 0,
+      left: 0,
+      right: 0,
+      borderBottomWidth: 0
+    },
     headerTintColor: '#e4ad5a',
   };
 
@@ -32,8 +48,6 @@ export default class NewUser extends React.Component {
   post = () => {
     let phone = this.state.phone;
     phone = phone.split(/[)(-]/g).join('');
-    // this.setState({phone});
-    console.log(phone);
     if (phone.length !== 10) {
       this.setState({ phoneErr: true });
     } else if (!this.state.name && !this.state.image_url && !this.state.phone) {
@@ -49,7 +63,6 @@ export default class NewUser extends React.Component {
     } else if (!this.state.image_url || !this.state.load) {
       this.setState({ urlErr: true });
     } else {
-      console.log('patch');
       fetch(`https://split-trip.herokuapp.com/users/${this.state.user_id}`, {
         method: 'PATCH',
         headers: {
@@ -151,29 +164,80 @@ export default class NewUser extends React.Component {
       <View style={styles.user}>
         <Image source={require('../css/background2.png')} style={styles.backgroundimage}></Image>
 
-        <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}} labelStyle={{color: '#ffd391', backgroundColor: 'transparent'}}>Name</FormLabel>
-        <FormInput onChangeText={this.updateName} value={this.state.name} containerStyle={{width: 350, borderBottomColor: '#ffd391'}} placeholderTextColor='#ffd391' inputStyle={{color: '#ffd391'}} selectionColor={'#ffd391'} />
-        {this.state.nameErr ? <FormValidationMessage labelStyle={{color: '#f46319', backgroundColor: 'transparent'}}>Please enter a name</FormValidationMessage> : null}
+        <FormLabel containerStyle={forms.labelContainer} labelStyle={forms.labelStyle}>
+          Name
+        </FormLabel>
+        <FormInput
+          onChangeText={this.updateName}
+          value={this.state.name}
+          containerStyle={forms.input}
+          placeholderTextColor={colors.lightYellow}
+          inputStyle={{color: colors.lightYellow}}
+          selectionColor={colors.lightYellow} />
+        {
+          this.state.nameErr
+            ? <FormValidationMessage labelStyle={forms.warn}>
+                Please enter a name
+              </FormValidationMessage>
+            : null
+        }
 
-        <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}} labelStyle={{color: '#ffd391', backgroundColor: 'transparent'}}>Image URL</FormLabel>
-        <FormInput onChangeText={this.updateUrl} value={this.state.image_url} containerStyle={{width: 350, borderBottomColor: '#ffd391'}} placeholderTextColor='#ffd391' inputStyle={{color: '#ffd391'}} selectionColor={'#ffd391'} />
-        {this.state.urlErr ? <FormValidationMessage  labelStyle={{color: '#f46319', backgroundColor: 'transparent'}}>Please enter a URL for the user icon</FormValidationMessage> : null}
+        <FormLabel containerStyle={forms.labelContainer} labelStyle={forms.labelStyle}>
+          Image URL
+        </FormLabel>
+        <FormInput
+          onChangeText={this.updateUrl}
+          value={this.state.image_url}
+          containerStyle={forms.input}
+          placeholderTextColor={colors.lightYellow}
+          inputStyle={{color: colors.lightYellow}}
+          selectionColor={colors.lightYellow} />
+        {
+          this.state.urlErr
+            ? <FormValidationMessage labelStyle={forms.warn}>
+                Please enter a URL for the user icon
+              </FormValidationMessage>
+            : null
+        }
 
-        <FormLabel containerStyle={{width: 395, alignItems: 'flex-start'}} labelStyle={{color: '#ffd391', backgroundColor: 'transparent'}}>Phone Number</FormLabel>
-        <FormInput onChangeText={this.updatePhone} value={this.state.phone} containerStyle={{width: 350, borderBottomColor: '#ffd391'}} placeholderTextColor='#ffd391' inputStyle={{color: '#ffd391'}} selectionColor={'#ffd391'} />
-        {this.state.phoneErr ? <FormValidationMessage  labelStyle={{color: '#f46319', backgroundColor: 'transparent'}}>Please enter a 10 digit phone number</FormValidationMessage> : null}
+        <FormLabel containerStyle={forms.labelContainer} labelStyle={forms.labelStyle}>
+          Phone Number
+        </FormLabel>
+        <FormInput
+          onChangeText={this.updatePhone}
+          value={this.state.phone}
+          containerStyle={forms.input}
+          placeholderTextColor={colors.lightYellow}
+          inputStyle={{color: colors.lightYellow}}
+          selectionColor={colors.lightYellow} />
+        {
+          this.state.phoneErr
+            ? <FormValidationMessage labelStyle={forms.warn}>
+                Please enter a 10 digit phone number
+              </FormValidationMessage>
+            : null
+        }
+
         <Text>{'\n\n\n'}</Text>
+
         {
           this.state.imageError
-            ? <Text style={{textAlign: 'center'}}>Could not load the image {'\n\n'} Please try another</Text>
+            ? <Text style={forms.warn}>
+                Could not load the image {'\n\n'} Please try another
+              </Text>
             : <View style={styles.box}>
-                <Image source={{uri: this.state.image_url}} onError={this.imgErr} onLoad={this.imgErrClear} style={styles.image}/>
+                <Image source={{uri: this.state.image_url}}
+                  onError={this.imgErr}
+                  onLoad={this.imgErrClear}
+                  style={styles.image}/>
               </View>
         }
 
 
         <TouchableOpacity onPress={this.post} style={styles.shadow}>
-          <Text style={styles.newButton}>Edit {this.state.name}</Text>
+          <Text style={styles.newButton}>
+            Edit {this.state.name}
+          </Text>
         </TouchableOpacity>
 
       </View>
@@ -181,63 +245,63 @@ export default class NewUser extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  user: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  image: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    overflow: 'hidden'
-  },
-  name: {
-    fontSize: 80,
-  },
-  newButton: {
-    // marginTop: 50,
-    textAlign: 'center',
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderColor: '#e4ad5a',
-    backgroundColor: '#e4ad5a',
-    // padding: 12,
-    borderRadius: 10,
-    overflow: 'hidden',
-    justifyContent: 'center',
-    fontSize: 16,
-    color: '#2a0001',
-    fontWeight: 'bold',
-    shadowOpacity: 0.7,
-    shadowOffset: {width: 1, height: 1},
-  },
-  box: {
-    shadowOpacity: 0.7,
-    shadowOffset: {width: 1, height: 1},
-    borderRadius: 50,
-    // overflow: 'hidden'
-  },
-  backgroundimage: {
-    position: 'absolute',
-    height,
-    width,
-    // opacity: 0.3
-    // left: (Dimensions.get('window').width - 64) / 2,
-    // borderRadius: 32,
-  },
-  shadow: {
-    marginTop: 50,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderColor: '#e4ad5a',
-    backgroundColor: '#e4ad5a',
-    padding: 12,
-    borderRadius: 10,
-    // width: 150,
-    // overflow: 'hidden',
-    shadowOpacity: 0.7,
-    shadowOffset: {width: 1, height: 1}
-  },
-});
+// const styles = StyleSheet.create({
+//   user: {
+//     flex: 1,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   },
+//   image: {
+//     width: 100,
+//     height: 100,
+//     borderRadius: 50,
+//     overflow: 'hidden'
+//   },
+//   name: {
+//     fontSize: 80,
+//   },
+//   newButton: {
+//     // marginTop: 50,
+//     textAlign: 'center',
+//     borderStyle: 'solid',
+//     borderWidth: 1,
+//     borderColor: '#e4ad5a',
+//     backgroundColor: '#e4ad5a',
+//     // padding: 12,
+//     borderRadius: 10,
+//     overflow: 'hidden',
+//     justifyContent: 'center',
+//     fontSize: 16,
+//     color: '#2a0001',
+//     fontWeight: 'bold',
+//     shadowOpacity: 0.7,
+//     shadowOffset: {width: 1, height: 1},
+//   },
+//   box: {
+//     shadowOpacity: 0.7,
+//     shadowOffset: {width: 1, height: 1},
+//     borderRadius: 50,
+//     // overflow: 'hidden'
+//   },
+//   backgroundimage: {
+//     position: 'absolute',
+//     height,
+//     width,
+//     // opacity: 0.3
+//     // left: (Dimensions.get('window').width - 64) / 2,
+//     // borderRadius: 32,
+//   },
+//   shadow: {
+//     marginTop: 50,
+//     borderStyle: 'solid',
+//     borderWidth: 1,
+//     borderColor: '#e4ad5a',
+//     backgroundColor: '#e4ad5a',
+//     padding: 12,
+//     borderRadius: 10,
+//     // width: 150,
+//     // overflow: 'hidden',
+//     shadowOpacity: 0.7,
+//     shadowOffset: {width: 1, height: 1}
+//   },
+// });

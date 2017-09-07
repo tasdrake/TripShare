@@ -8,14 +8,14 @@ module.exports = {
   },
   input: {
     width: 350,
-    borderBottomColor: '#ffd391'
+    borderBottomColor: colors.lightYellow
   },
   labelContainer: {
     width: 395,
     alignItems: 'flex-start'
   },
   labelStyle: {
-    color: '#ffd391',
+    color: colors.lightYellow,
     backgroundColor: 'transparent'
   }
 };
