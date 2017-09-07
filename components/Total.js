@@ -4,6 +4,9 @@ import { NavigationActions } from 'react-navigation';
 import { List, ListItem } from 'react-native-elements';
 const {height, width} = Dimensions.get('window');
 
+// import styles from '../css/TripUsers';
+// import colors from '../css/colors';
+
 export default class Total extends React.Component {
   static navigationOptions = {
     headerStyle:{ position: 'absolute', backgroundColor: 'transparent',  top: 0, left: 0, right: 0, borderBottomWidth: 0,},
