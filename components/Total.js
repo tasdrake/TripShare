@@ -82,6 +82,7 @@ export default class Total extends React.Component {
     return (
       <View style={styles.container}>
         <Image source={require('../css/background2.png')} style={styles.backgroundimage}></Image>
+        <ScrollView>
         <List containerStyle={{marginBottom: 20, marginTop: 0, backgroundColor: 'transparent', borderColor: '#e4ad5a', borderBottomColor: '#e4ad5a'}}>
           <ListItem hideChevron title={`Trip cost: $${this.state.totals.total}`} rightTitle={`Individual cost: $${this.state.totals.individualCost}`} rightTitleStyle={{color: '#ffd391', fontSize: 18}} titleStyle={{color: '#ffd391', fontSize: 18}} containerStyle={{backgroundColor: 'rgba(255,255,255,0.2)', borderColor: '#e4ad5a', borderBottomColor: '#e4ad5a'}}/>
           {
@@ -96,11 +97,15 @@ export default class Total extends React.Component {
             })
           }
         </List>
+        </ScrollView>
 
-        <View style={{alignItems: 'center'}}>
-          <TouchableOpacity onPress={() => navigate('Trips', {admin: this.state.admin})}>
-            <Text style={styles.footer}>Search Other Trips</Text>
-          </TouchableOpacity>
+        <View style={{alignItems: 'center', marginBottom: 10}}>
+          <View style={styles.shadow}>
+            <TouchableOpacity onPress={() => navigate('Trips', {admin: this.state.admin})}>
+              <Text style={styles.footer}>Search Other Trips</Text>
+            </TouchableOpacity>
+          </View>
+          {/* <View shadowOpacity={ 0.7 } style={{ height: 44, width: 200, borderRadius: 10, shadowOffset: {width: 1, height: 1}, marginTop: -49, zIndex: -1, marginBottom: 12, backgroundColor: 'transparent'}}></View> */}
         </View>
       </View>
     );
@@ -111,6 +116,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 60,
+
   },
   footer: {
     textAlign: 'center',
@@ -118,15 +124,17 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#e4ad5a',
     backgroundColor: '#e4ad5a',
-    padding: 12,
+    // padding: 12,
     borderRadius: 10,
     overflow: 'hidden',
     justifyContent: 'center',
     fontSize: 16,
     color: '#2a0001',
     fontWeight: 'bold',
-    width: 200,
-    marginTop: 10,
+    // width: 200,
+    // marginTop: 10,
+    shadowOpacity: 0.7,
+    shadowOffset: {width: 1, height: 1},
   },
   people: {
     flex: 1,
@@ -146,5 +154,19 @@ const styles = StyleSheet.create({
     height,
     width,
     // opacity: 0.3
+  },
+  shadow: {
+    // marginTop: 50,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#e4ad5a',
+    backgroundColor: '#e4ad5a',
+    padding: 12,
+    borderRadius: 10,
+    // width: 150,
+    // overflow: 'hidden',
+    shadowOpacity: 0.7,
+    shadowOffset: {width: 1, height: 1},
+    marginTop: 10,
   },
 });

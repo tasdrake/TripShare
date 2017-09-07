@@ -64,9 +64,10 @@ export default class TripUsers extends React.Component {
         {
           this.state.admin[0].id === this.state.admin_id
           ? <View style={styles.topContainer}>
-              <TouchableOpacity onPress={() => navigate('NewUser', { trip_name: this.state.name, trip_id: this.state.trip_id, updateUsers: this.updateUsers })}>
+              <TouchableOpacity onPress={() => navigate('NewUser', { trip_name: this.state.name, trip_id: this.state.trip_id, updateUsers: this.updateUsers })} style={styles.shadow}>
                 {/* <Text style={styles.newUser}>Add Someone to {this.state.name}</Text> */}
                 <Text style={styles.newUser}>New Person</Text>
+                {/* <View shadowOpacity={ 0.7 } style={{ height: 45, width: 120, borderRadius: 10, shadowOffset: {width: 1, height: 1}, marginTop: -45, zIndex: -1, marginLeft: 10, backgroundColor: 'transparent'}}></View> */}
               </TouchableOpacity>
               <FormInput placeholder='Search for trips' placeholderTextColor='#ffd391' onChangeText={this.search} containerStyle={styles.search, {width: 210, borderBottomColor: '#ffd391'}} inputStyle={{color: '#ffd391', marginTop: 15}} />
               {/* <SearchBar
@@ -108,10 +109,14 @@ export default class TripUsers extends React.Component {
           }
           {/* </View> */}
         </ScrollView>
-        <View style={{justifyContent: 'center', alignItems: 'center'}}>
-          <TouchableOpacity onPress={() => navigate('Total', { trip_id: this.state.trip_id, admin: this.state.admin, admin_id: this.state.admin_id })} >
-            <Text style={styles.footer}>Total Trip</Text>
-          </TouchableOpacity>
+        <View style={{justifyContent: 'center', alignItems: 'center', marginBottom: 10,}}>
+
+          <View style={styles.shadow2}>
+            <TouchableOpacity onPress={() => navigate('Total', { trip_id: this.state.trip_id, admin: this.state.admin, admin_id: this.state.admin_id })} >
+              <Text style={styles.footer}>Total Trip</Text>
+            </TouchableOpacity>
+            {/* <View shadowOpacity={ 0.7 } style={{ height: 45, width: 200, borderRadius: 10, shadowOffset: {width: 1, height: 1}, marginTop: -45, zIndex: -1, marginBottom: 5, backgroundColor: 'transparent'}}></View> */}
+          </View>
         </View>
       </View>
     );
@@ -154,15 +159,17 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#e4ad5a',
     backgroundColor: '#e4ad5a',
-    padding: 12,
+    // padding: 12,
     borderRadius: 10,
     overflow: 'hidden',
     justifyContent: 'center',
     fontSize: 16,
     color: '#2a0001',
     fontWeight: 'bold',
-    width: 200,
-    marginTop: 10,
+    // width: 200,
+    // marginTop: 10,
+    shadowOpacity: 0.7,
+    shadowOffset: {width: 1, height: 1},
   },
   newUser: {
     textAlign: 'center',
@@ -170,16 +177,18 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#e4ad5a',
     backgroundColor: '#e4ad5a',
-    padding: 12,
+    // padding: 12,
     borderRadius: 10,
     // width: 160,
     overflow: 'hidden',
     justifyContent: 'center',
-    marginLeft: 10,
-    marginTop: 10,
+    // marginLeft: 10,
+    // marginTop: 10,
     fontSize: 16,
     color: '#2a0001',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    shadowOpacity: 0.7,
+    shadowOffset: {width: 1, height: 1},
   },
   box: {
     shadowOpacity: 0.7,
@@ -202,10 +211,41 @@ const styles = StyleSheet.create({
   },
   search: {
     borderBottomColor: '#ffd391',
+    width: 340,
   },
   topContainer: {
     flexWrap: 'nowrap',
     flexDirection: 'row',
     marginBottom: 10,
+  },
+  shadow: {
+    // marginTop: 50,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#e4ad5a',
+    backgroundColor: '#e4ad5a',
+    padding: 12,
+    borderRadius: 10,
+    // width: 150,
+    // overflow: 'hidden',
+    shadowOpacity: 0.7,
+    shadowOffset: {width: 1, height: 1},
+    marginLeft: 10,
+    marginTop: 10,
+  },
+  shadow2: {
+    // marginTop: 50,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#e4ad5a',
+    backgroundColor: '#e4ad5a',
+    padding: 12,
+    borderRadius: 10,
+    width: 200,
+    // width: 150,
+    // overflow: 'hidden',
+    shadowOpacity: 0.7,
+    shadowOffset: {width: 1, height: 1},
+    marginTop: 10
   },
 });
