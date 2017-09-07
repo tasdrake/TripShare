@@ -80,28 +80,30 @@ class Splash extends React.Component {
 
           {/* <Image source={require('../css/road.jpg')} style={styles.image}></Image> */}
           <Image source={require('../css/background2.png')} style={styles.image}></Image>
-          <View style={styles.container}>
+          {/* <View style={styles.container}>
             <View style={styles.content}>
-              {/* <Text style={styles.title}>Welcome to TripShare {'\n'}</Text> */}
-              {/* <View style={styles.box}>
+              <Text style={styles.title}>Welcome to TripShare {'\n'}</Text>
+              <View style={styles.box}>
               <Text>login</Text>
-            </View> */}
+            </View>
             <Text style={styles.title} shadowOffset={{width: 10, height: 10}} shadowColor='black'>login to create a trip or continue to all see active trips</Text>
-          </View>
+          </View> */}
 
-          <View style={styles.buttons} shadowOffset={{width: 10, height: 10}}>
+          {/* <View style={styles.buttons} shadowOffset={{width: 10, height: 10}}> */}
             <View>
-              <Icon.Button name="facebook" backgroundColor="#3b5998" onPress={this.loginWithFacebook} {...iconStyles} shadowOffset={{width: 10, height: 10}}>
-                Facebook login
-              </Icon.Button>
-              <View shadowOpacity={ 0.7 } style={{ height: 46, width: 148, borderRadius: 10, shadowOffset: {width: 1, height: 1}, marginTop: -46, zIndex: -1, backgroundColor: 'transparent'}}></View>
+              <TouchableOpacity style={styles.shadow}>
+                <Icon.Button name="facebook" backgroundColor="transparent" onPress={this.loginWithFacebook} {...iconStyles}>
+                  Login with Facebook to Create or Edit Trips
+                </Icon.Button>
+              </TouchableOpacity>
+              {/* <View shadowOpacity={ 0.7 } style={{ height: 46, width: 148, borderRadius: 10, shadowOffset: {width: 1, height: 1}, marginTop: -46, zIndex: -1, backgroundColor: 'transparent'}}></View> */}
             </View>
 
               <TouchableOpacity onPress={() => navigate('Trips', {admin})} style={styles.tripButton}>
-                <Text style={styles.buttonText}>Go to trips</Text>
+                <Text style={styles.buttonText}>Add Receipts and See Totals</Text>
               </TouchableOpacity>
-          </View>
-        </View>
+          {/* </View> */}
+        {/* </View> */}
       </View>
     );
   }
@@ -111,7 +113,7 @@ const iconStyles = {
   iconStyle: {
     paddingVertical: 5
   },
-  width: 150,
+  width: 350,
   shadowOpacity: 0.7,
   shadowOffset: {width: 1, height: 1}
 };
@@ -121,13 +123,13 @@ const styles = StyleSheet.create({
     flex: 1,
     // backgroundColor: colors.yellow
   },
-  content: {
+  container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'transparent',
-    shadowOpacity: 0.7,
-    shadowOffset: {width: 1, height: 1}
+    flexDirection: 'column',
+
   },
   avatar: {
     margin: 20
@@ -171,10 +173,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#e4ad5a',
     padding: 12,
     borderRadius: 10,
-    // width: 150,
+    width: 350,
     // overflow: 'hidden',
     shadowOpacity: 0.7,
-    shadowOffset: {width: 1, height: 1}
+    shadowOffset: {width: 1, height: 1},
+    marginVertical: 50,
 
   },
   buttonText: {
@@ -198,6 +201,18 @@ color: '#2a0001',
     borderRadius: 100/2,
     backgroundColor: 'red'
   },
+  shadow: {
+    borderRadius: 10,
+    borderColor: '#3b5998',
+    borderWidth: 1,
+    backgroundColor: '#3b5998',
+    // width: 300,
+    // overflow: 'hidden',
+    shadowOpacity: 0.7,
+    shadowOffset: {width: 1, height: 1},
+    width: 350,
+    marginVertical: 50,
+  }
 
 });
 
