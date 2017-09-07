@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, Alert, Dimensions } from 'react-native';
-import { NavigationActions } from 'react-navigation';
 import { List, ListItem } from 'react-native-elements';
 const {height, width} = Dimensions.get('window');
 
