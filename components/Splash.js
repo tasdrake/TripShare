@@ -10,6 +10,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
 import styles from '../css/Splash';
+import colors from '../css/colors';
 
 
 export default class Splash extends React.Component {
@@ -71,18 +72,32 @@ export default class Splash extends React.Component {
       <View style={styles.container}>
 
         <Image source={require('../css/background2.png')} style={styles.image}/>
+        <View style={{flex: 1}}>
+          <View style={{flex: 1}}>
 
-        <View>
-          <TouchableOpacity style={styles.shadow}>
-            <Icon.Button name="facebook" backgroundColor="transparent" onPress={this.loginWithFacebook} {...styles.icon}>
-              Login with Facebook to Create or Edit Trips
-            </Icon.Button>
-          </TouchableOpacity>
+          </View>
+          <View style={{flex: 2}}>
+
+            <Text style={{fontSize: 65, color: colors.lightYellow, fontFamily: 'Florencesans'}}>Trip Share</Text>
+          </View>
+          <View style={{flex: 1}}>
+
+          </View>
+          <View style={{flex: 3, marginBottom: 100}}>
+            <View>
+              <TouchableOpacity style={styles.shadow}>
+                <Icon.Button name="facebook" backgroundColor="transparent" onPress={this.loginWithFacebook} {...styles.icon}>
+                  Login with Facebook to Create or Edit Trips
+                </Icon.Button>
+              </TouchableOpacity>
+            </View>
+
+            <TouchableOpacity onPress={() => navigate('Trips', {admin})} style={styles.tripButton}>
+              <Text style={styles.buttonText}>Add Receipts and See Totals</Text>
+            </TouchableOpacity>
+          </View>
         </View>
 
-        <TouchableOpacity onPress={() => navigate('Trips', {admin})} style={styles.tripButton}>
-          <Text style={styles.buttonText}>Add Receipts and See Totals</Text>
-        </TouchableOpacity>
       </View>
     );
   }

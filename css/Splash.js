@@ -38,7 +38,8 @@ module.exports = {
     fontSize: 16,
     color: colors.darkBrown,
     backgroundColor: 'transparent',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    // fontFamily: 'Comfortaa'
   },
   image: {
     position: 'absolute',
